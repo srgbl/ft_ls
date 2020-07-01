@@ -6,13 +6,13 @@
 /*   By: gloras-t <gloras-t@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 20:56:02 by gloras-t          #+#    #+#             */
-/*   Updated: 2020/07/01 21:50:28 by gloras-t         ###   ########.fr       */
+/*   Updated: 2020/07/01 22:20:12 by gloras-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-int	main()
+int	main(void)
 {
 	foo();
 	return (0);
