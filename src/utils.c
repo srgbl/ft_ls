@@ -6,13 +6,13 @@
 /*   By: gloras-t <gloras-t@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 21:49:25 by gloras-t          #+#    #+#             */
-/*   Updated: 2020/07/02 00:30:00 by gloras-t         ###   ########.fr       */
+/*   Updated: 2020/07/02 00:36:14 by gloras-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-int	foo(char *dir_name)
+int	print_all_file_in_dir(char *dir_name)
 {
 	DIR		*dirp;
 	DIRENT	*dp;

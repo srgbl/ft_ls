@@ -6,7 +6,7 @@
 /*   By: gloras-t <gloras-t@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 20:57:11 by gloras-t          #+#    #+#             */
-/*   Updated: 2020/07/02 00:30:14 by gloras-t         ###   ########.fr       */
+/*   Updated: 2020/07/02 00:36:19 by gloras-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # define	USER	"USER"
 
 int 	ft_printf(const char *restrict format, ...);
-int		foo(char *dir_name);
+int		print_all_file_in_dir(char *dir_name);
 char	*get_env_by_name(char *envp[], char *name);
 void	println(char *line);
 
