@@ -6,22 +6,43 @@
 /*   By: gloras-t <gloras-t@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 21:49:25 by gloras-t          #+#    #+#             */
-/*   Updated: 2020/07/01 22:19:43 by gloras-t         ###   ########.fr       */
+/*   Updated: 2020/07/02 00:30:00 by gloras-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-int	foo(void)
+int	foo(char *dir_name)
 {
 	DIR		*dirp;
 	DIRENT	*dp;
 	
-	dirp = opendir(".");
+	dirp = opendir(dir_name);
 	if (dirp == 0)
 		return (-1);
 	while ((dp = readdir(dirp)) != 0)
-		ft_printf("%s\n", dp->d_name);
+		println(dp->d_name);
 	closedir(dirp);
 	return (1);
+}
+
+char	*get_env_by_name(char *envp[], char *name)
+{
+	int	i;
+	int	sep_pos;
+
+	i = 0;
+	while (envp[i])
+	{
+		sep_pos = ft_strchrind(envp[i], '='); //check if not found
+		if (!ft_strncmp(envp[i], name, sep_pos))
+			return ft_strsub(envp[i], sep_pos + 1, ft_strlen(envp[i]));
+		i++;
+	}
+	return NULL;
+}
+
+void	println(char *line)
+{
+	ft_printf("%s\n", line);
 }
