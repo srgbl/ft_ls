@@ -6,7 +6,7 @@
 #    By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/01 12:49:11 by gloras-t          #+#    #+#              #
-#    Updated: 2019/10/29 19:51:01 by slindgre         ###   ########.fr        #
+#    Updated: 2020/07/03 21:46:39 by slindgre         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,7 +63,7 @@ EOC = \033[0m
 all: $(NAME)
 $(NAME):
 	@make -C ../libft/
-	@gcc $(FLAGS) -c $(SRC)
+	@gcc $(FLAGS) -c $(SRC) -g
 	@ar rc $(NAME) $(OBJ) ../libft/*.o
 	@echo "$(GREEN)complete:$(EOC) $(ITALIC)FT_PRINTF$(EOC)"
 
