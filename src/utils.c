@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 21:49:25 by gloras-t          #+#    #+#             */
-/*   Updated: 2020/07/03 22:48:57 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/07/04 18:30:52 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,4 @@ char	*get_env_by_name(char *envp[], char *name)
 void	println(char *line)
 {
 	ft_printf("%s\n", line);
-}
-
-void	print_list(t_list *elem)
-{
-	ft_printf("%s\n", elem->content);
 }

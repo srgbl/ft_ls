@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 11:35:28 by gloras-t          #+#    #+#             */
-/*   Updated: 2020/07/03 22:47:54 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/07/04 18:31:36 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ static int	parse_options(char *arg, uint8_t *options)
 {
 	int	ind;
 
-	arg++;
 	while (*arg)
 	{
 		ind = ft_strchrind(OPTIONS, *arg);
@@ -41,10 +40,10 @@ int			parse_args(int argc, char *argv[], uint8_t *options, t_list **paths)
 	{
 		if (ft_strlen(argv[i]) > 1 && argv[i][0] == '-')
 		{
-			if (parse_options(argv[i], options) == -1)
+			if (parse_options(argv[i] + 1, options) == -1)
 			{
-				ft_printf("ls: invalid option -- '%c'\n");
-				ft_lstdel(paths, ft_bzero);
+				ft_printf("ft_ls: invalid option -- '%c'\n");
+				ft_lstdel(paths, ft_lst_free_elem);
 				exit(-1);
 			}
 		}
