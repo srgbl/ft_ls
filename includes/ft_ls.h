@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 20:57:11 by gloras-t          #+#    #+#             */
-/*   Updated: 2020/07/03 23:06:44 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/07/04 21:03:04 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@
 # include <stdint.h>
 # include "libft.h"
 
-# define DIRENT     struct dirent
-# define USER       "USER"
-# define OPT_A      1
-# define OPT_L      2
-# define OPT_R      4
-# define OPT_T      8
-# define OPT_RR     16
-# define OPTIONS    "alrtR"
+# define DIRENT         struct dirent
+# define USER           "USER"
+# define OPT_LOWER_A    1
+# define OPT_LOWER_L    2
+# define OPT_LOWER_R    4
+# define OPT_LOWER_T    8
+# define OPT_UPPER_R    16
+# define OPTIONS        "alrtR"
 
 int		ft_printf(const char *restrict format, ...);
 
