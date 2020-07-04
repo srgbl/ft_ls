@@ -6,7 +6,7 @@
 /*   By: gloras-t <gloras-t@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 20:56:02 by gloras-t          #+#    #+#             */
-/*   Updated: 2020/07/04 12:56:36 by gloras-t         ###   ########.fr       */
+/*   Updated: 2020/07/04 18:50:21 by gloras-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	main(int argc, char *argv[], char *envp[])
 	// println(user);
 	// free(user);
 	// print_visible_files_in_dir(".");
-	get_file_stat(argv[1]);
+	t_file *file = init_file();
+	set_file(".", file);
 	return (0);
 }

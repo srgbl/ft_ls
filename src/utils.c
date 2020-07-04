@@ -6,47 +6,54 @@
 /*   By: gloras-t <gloras-t@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 21:49:25 by gloras-t          #+#    #+#             */
-/*   Updated: 2020/07/04 13:00:48 by gloras-t         ###   ########.fr       */
+/*   Updated: 2020/07/04 18:58:43 by gloras-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-int	print_all_file_in_dir(char *dir_name)
+int		print_all_file_in_dir(char *dir_name)
 {
-	DIR		*dirp;
-	DIRENT	*dp;
+	DIR			*dirp;
+	t_dirent	*dp;
 	
 	dirp = opendir(dir_name);
-	if (dirp == 0)
+	if (dirp == NULL)
 		return (-1);
-	while ((dp = readdir(dirp)) != 0)
-		println(dp->d_name);
-	closedir(dirp);
-	return (1);
+	while ((dp = readdir(dirp)) != NULL)
+		ft_putendl(dp->d_name);
+	return (closedir(dirp));
 }
 
-int	print_visible_files_in_dir(char *dir_name)
+int		set_file(char *dir_name, t_file *file)
 {
-	DIR		*dirp;
-	DIRENT	*dp;
+	DIR			*dirp;
+	t_dirent	*dp;
+
+	file++;
 	
 	dirp = opendir(dir_name);
 	if (dirp == 0)
 		return (-1);
 	while ((dp = readdir(dirp)) != 0)
 	{
-		if (dp->d_name[0] != '.')
-			println(dp->d_name);
+		if (!ft_strcmp(dp->d_name, "Makefile"))
+		{
+			file->name = ft_strnew(dp->d_namlen);
+			ft_strcpy(file->name, dp->d_name);
+			file->type = dp->d_type;
+			if (dp->d_name[0] == '.')
+				file->visibility = 1;
+			get_file_stat(file);
+		}
 	}
-	closedir(dirp);
-	return (1);
+	return (closedir(dirp));
 }
 
 /*
 ** memory allocated
 */
-int	time_format(long *timestamp)
+int		time_format(long *timestamp)
 {
 	char	*timeformat;
 	char	*ptr;
@@ -60,19 +67,36 @@ int	time_format(long *timestamp)
 	t[2] = ':';
 	t[3] = *(ptr + 1);
 	t[4] = *(ptr + 2);
-	println(t);
+	ft_putendl(t);
 	return (0);
 }
-int	get_file_stat(char *name)
-{
-	struct stat	buf;
 
-	stat(name, &buf);
-	// buf.st_size
-	// buf.st_nlink
-	// buf.st_mtimespec
-	time_format(&(buf.st_mtimespec.tv_sec));
-	return (0);
+t_file	*init_file()
+{
+	t_file	*file;
+
+	file = (t_file*)malloc(sizeof(t_file));
+	file->name = NULL;
+	file->type = 0;
+	file->visibility = 0;
+	file->last_modified = 0;
+	file->n_links = 0;
+	file->size = 0;
+	file->gid = 0;
+	file->uid = 0;
+	return (file);
+}
+
+void	get_file_stat(t_file *file)
+{
+	t_stat	buf;
+
+	stat(file->name, &buf);
+	file->last_modified = buf.st_mtimespec.tv_sec;
+	file->n_links = buf.st_nlink;
+	file->size = buf.st_size;
+	file->gid = buf.st_gid;
+	file->uid = buf.st_uid;
 }
 
 
@@ -90,9 +114,4 @@ char	*get_env_by_name(char *envp[], char *name)
 		i++;
 	}
 	return NULL;
-}
-
-void	println(char *line)
-{
-	ft_printf("%s\n", line);
 }
