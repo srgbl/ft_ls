@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gloras-t <gloras-t@student.42.fr>          +#+  +:+       +#+         #
+#    By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/23 22:16:23 by gloras-t          #+#    #+#              #
-#    Updated: 2019/10/26 22:22:28 by gloras-t         ###   ########.fr        #
+#    Updated: 2020/07/03 21:46:17 by slindgre         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ EOC = \033[0m
 all: $(NAME)
 
 $(NAME): $(FILES)
-	@gcc -c $(FLAGS) $(FILES)
+	@gcc -c $(FLAGS) $(FILES) -g
 	@ar rc $(NAME) $(OBJ)
 	@echo "$(GREEN)complete:$(EOC) $(ITALIC)LIBFT$(EOC)"
 

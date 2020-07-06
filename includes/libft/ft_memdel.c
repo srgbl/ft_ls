@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/01 17:47:53 by slindgre          #+#    #+#             */
-/*   Updated: 2018/12/01 18:01:50 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/07/04 18:46:13 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_memdel(void **ap)
 {
-	if (ap == NULL)
+	if (ap == NULL || *ap == NULL)
 		return ;
 	free(*ap);
 	*ap = NULL;
