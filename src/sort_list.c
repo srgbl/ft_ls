@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 20:26:02 by slindgre          #+#    #+#             */
-/*   Updated: 2020/08/24 02:27:52 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/08/24 02:43:45 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,31 +18,31 @@ void	swap_arr_elems(t_list **a, t_list **b)
 
 	tmp = *a;
 	*a = *b;
-	*b = tmp;  
+	*b = tmp;
 }
 
 int		sort_paths(t_list *a, t_list *b)
 {
-	return ft_strcmp(a->content, b->content);
+	return (ft_strcmp(a->content, b->content));
 }
 
 int		sort_files(t_list *a, t_list *b)
 {
 	t_file *a_file;
 	t_file *b_file;
-	
+
 	a_file = (t_file*)a->content;
 	b_file = (t_file*)b->content;
-	return ft_strcmp(a_file->name, b_file->name);
+	return (ft_strcmp(a_file->name, b_file->name));
 }
 
-void	quick_sort(t_list **list_arr, int low, int high, 
+void	quick_sort(t_list **list_arr, int low, int high,
 					int (*sort)(t_list*, t_list*))
 {
-	int 	i;
-	int  	j;
-	t_list  *mid;
-	
+	int		i;
+	int		j;
+	t_list	*mid;
+
 	if (high - low == 0)
 		return ;
 	i = low;
@@ -55,11 +55,7 @@ void	quick_sort(t_list **list_arr, int low, int high,
 		while (sort(list_arr[j], mid) > 0)
 			j--;
 		if (i <= j)
-		{
-			swap_arr_elems(&list_arr[i], &list_arr[j]);
-			i++;
-			j--;
-		}
+			swap_arr_elems(&list_arr[i++], &list_arr[j--]);
 	}
 	if (low < i - 1)
 		quick_sort(list_arr, low, i - 1, sort);
@@ -71,8 +67,8 @@ void	sort_list(t_list **list, int (*sort)(t_list*, t_list*))
 {
 	t_list	**list_arr;
 	t_list	*tmp;
-	size_t  size;
-	size_t  i;
+	size_t	size;
+	size_t	i;
 
 	if (list == NULL || *list == NULL)
 		return ;
@@ -82,18 +78,16 @@ void	sort_list(t_list **list, int (*sort)(t_list*, t_list*))
 	i = 0;
 	while (tmp)
 	{
-		list_arr[i] = tmp;
+		list_arr[i++] = tmp;
 		tmp = tmp->next;
-		i++;
 	}
 	quick_sort(list_arr, 0, size - 1, sort);
-	i = 0;
-	while (i < size - 1)
+	while (i > 1)
 	{
-		list_arr[i]->next = list_arr[i + 1];
-		i++;    
+		list_arr[size - i]->next = list_arr[size - i + 1];
+		i--;
 	}
-	list_arr[i]->next = NULL;
+	list_arr[size - 1]->next = NULL;
 	*list = list_arr[0];
 	free(list_arr);
 }
