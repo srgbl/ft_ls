@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 11:35:28 by gloras-t          #+#    #+#             */
-/*   Updated: 2020/07/04 18:31:36 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/08/23 18:39:43 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int	parse_options(char *arg, uint8_t *options)
 	return (0);
 }
 
-int			parse_args(int argc, char *argv[], uint8_t *options, t_list **paths)
+int			parse_args(int argc, char *argv[], t_list **paths, uint8_t *options)
 {
 	int	i;
 

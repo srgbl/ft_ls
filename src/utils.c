@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 21:49:25 by gloras-t          #+#    #+#             */
-/*   Updated: 2020/07/04 18:30:52 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/08/24 02:38:24 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int		print_all_file_in_dir(char *dir_name)
 {
-	DIR		*dirp;
-	DIRENT	*dp;
+	DIR			*dirp;
+	t_dirent	*dp;
 
 	dirp = opendir(dir_name);
 	if (dirp == 0)
@@ -45,4 +45,12 @@ char	*get_env_by_name(char *envp[], char *name)
 void	println(char *line)
 {
 	ft_printf("%s\n", line);
+}
+
+void	print_file_name(t_list *list)
+{
+	t_file *file;
+
+	file = (t_file*)list->content;
+	ft_printf("%s\n", file->name);
 }

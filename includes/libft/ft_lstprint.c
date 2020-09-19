@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/17 17:03:11 by slindgre          #+#    #+#             */
-/*   Updated: 2019/01/17 17:07:34 by slindgre         ###   ########.fr       */
+/*   Created: 2018/12/12 22:27:25 by gloras-t          #+#    #+#             */
+/*   Updated: 2020/08/23 18:55:17 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 void	ft_lstprint(t_list *lst)
 {
-	if (!lst)
-		return ;
-	while (lst->next)
-		ft_putendl((char const *)lst->content);
+	while (lst)
+	{
+		ft_putendl(lst->content);
+		lst = lst->next;
+	}
 }

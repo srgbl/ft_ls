@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/23 22:16:00 by gloras-t          #+#    #+#             */
-/*   Updated: 2020/07/04 18:46:39 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/08/23 18:54:32 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ size_t					ft_lstsize(t_list *lst);
 void					ft_lstadd_end(t_list **alst, t_list *new);
 void					ft_lstadd_back(t_list **list, void const *content,
 					size_t content_size);
-void					ft_lstshow_content(t_list *lst);
+void					ft_lstprint(t_list *lst);
 int						ft_lstcmp(t_list *list, int (f)(t_list*, size_t),
 						size_t n);
 

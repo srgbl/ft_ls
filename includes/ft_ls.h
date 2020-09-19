@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 20:57:11 by gloras-t          #+#    #+#             */
-/*   Updated: 2020/07/04 21:03:04 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/08/24 00:34:57 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,12 @@
 # include <dirent.h>
 # include <stdio.h>
 # include <stdint.h>
+# include <sys/stat.h>
+# include <errno.h>
 # include "libft.h"
 
-# define DIRENT         struct dirent
+typedef struct dirent	t_dirent;
+typedef struct stat		t_stat;
 # define USER           "USER"
 # define OPT_LOWER_A    1
 # define OPT_LOWER_L    2
@@ -27,12 +30,24 @@
 # define OPT_UPPER_R    16
 # define OPTIONS        "alrtR"
 
+typedef struct	s_file
+{
+	char        *name;
+	int     	type;
+	int     	visibility;
+	long    	last_modified;
+	long		gid;
+	long		uid;
+	int     	n_links;
+	int     	size;
+}				t_file;
+
 int		ft_printf(const char *restrict format, ...);
 
 /*
 ** parse_args.c
 */
-int		parse_args(int argc, char *argv[], uint8_t *options, t_list **paths);
+int		parse_args(int argc, char *argv[], t_list **paths, uint8_t *options);
 
 /*
 ** utils.c
@@ -40,6 +55,19 @@ int		parse_args(int argc, char *argv[], uint8_t *options, t_list **paths);
 int		print_all_file_in_dir(char *dir_name);
 char	*get_env_by_name(char *envp[], char *name);
 void	println(char *line);
-void	print_list(t_list *elem);
+void	print_file_name(t_list *list);
+
+/*
+** path_utils.c
+*/
+void	verify_paths(t_list **paths, t_list **files, uint8_t options);
+void	ft_lst_free_file(void *elem, size_t content_size);
+
+/*
+** sort_list.c
+*/
+void	sort_list(t_list **list, int (*sort)(t_list*, t_list*));
+int     sort_paths(t_list *a, t_list *b);
+int     sort_files(t_list *a, t_list *b);
 
 #endif

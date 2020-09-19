@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/15 18:08:02 by slindgre          #+#    #+#             */
-/*   Updated: 2019/01/15 18:14:35 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/08/24 02:27:08 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 
 void	ft_lstiter(t_list *lst, void (*f)(t_list *elem))
 {
-	if (!lst)
+	if (f == NULL)
 		return ;
-	if (lst->next)
-		ft_lstiter(lst->next, f);
-	f(lst);
+	while (lst)
+	{
+		f(lst);
+		lst = lst->next;
+	}
 }
