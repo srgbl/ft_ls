@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 20:26:02 by slindgre          #+#    #+#             */
-/*   Updated: 2020/08/23 23:00:37 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/10/04 02:18:20 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,14 +68,12 @@ void	ft_lst_del_elem(t_list **list, t_list **needle)
 	}
 }
 
-void	verify_paths(t_list **paths, t_list **files, uint8_t options)
+void	verify_paths(t_list *path, t_list **dirs, t_list **files, uint8_t options)
 {
 	t_stat	buf;
 	t_file	file;
-	t_list	*path;
 	int		(*stat_func)(const char *, struct stat *);
 
-	path = *paths;
 	stat_func = (options & OPT_LOWER_L) ? stat : lstat;
 	while (path != NULL)
 	{
@@ -84,15 +82,15 @@ void	verify_paths(t_list **paths, t_list **files, uint8_t options)
 		if (errno == ENOENT)
 		{
 			print_error(errno, path);
-			ft_lst_del_elem(paths, &path);
-		}
-		else if ((buf.st_mode & __S_IFMT) != __S_IFDIR)
-		{
-			map_to_file(buf, path->content, &file);
-			ft_lstadd(files, ft_lstnew(&file, sizeof(file)));
-			ft_lst_del_elem(paths, &path);
 		}
 		else
-			path = path->next;
+		{
+			map_to_file(buf, path->content, &file);
+			if ((buf.st_mode & __S_IFMT) != __S_IFDIR)
+				ft_lstadd(files, ft_lstnew(&file, sizeof(file)));
+			else
+				ft_lstadd(dirs, ft_lstnew(&file, sizeof(file)));
+		}
+		path = path->next;
 	}
 }

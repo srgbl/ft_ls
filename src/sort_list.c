@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 20:26:02 by slindgre          #+#    #+#             */
-/*   Updated: 2020/08/24 02:43:45 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/10/04 02:19:44 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,6 @@ void	swap_arr_elems(t_list **a, t_list **b)
 	tmp = *a;
 	*a = *b;
 	*b = tmp;
-}
-
-int		sort_paths(t_list *a, t_list *b)
-{
-	return (ft_strcmp(a->content, b->content));
 }
 
 int		sort_files(t_list *a, t_list *b)
