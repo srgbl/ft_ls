@@ -6,19 +6,20 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 20:26:02 by slindgre          #+#    #+#             */
-/*   Updated: 2020/10/04 02:18:20 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/10/04 02:39:30 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void	print_error(int err, t_list *path)
+void	print_error(int err, char *path)
 {
 	if (err == ENOENT)
-	{
 		ft_printf("ft_ls: cannot access '%s': %s\n",
-				path->content, strerror(errno));
-	}
+				path, strerror(err));
+	if (err == EACCES)
+		ft_printf("ft_ls: cannot access '%s': %s\n",
+				path, strerror(err));
 }
 
 void	ft_lst_free_file(void *elem, size_t content_size)
@@ -68,7 +69,8 @@ void	ft_lst_del_elem(t_list **list, t_list **needle)
 	}
 }
 
-void	verify_paths(t_list *path, t_list **dirs, t_list **files, uint8_t options)
+void	verify_paths(t_list *path, t_list **dirs, t_list **files,
+uint8_t options)
 {
 	t_stat	buf;
 	t_file	file;
@@ -79,9 +81,9 @@ void	verify_paths(t_list *path, t_list **dirs, t_list **files, uint8_t options)
 	{
 		errno = 0;
 		stat_func(path->content, &buf);
-		if (errno == ENOENT)
+		if (errno)
 		{
-			print_error(errno, path);
+			print_error(errno, path->content);
 		}
 		else
 		{

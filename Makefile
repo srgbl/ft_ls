@@ -6,7 +6,7 @@
 #    By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/01 20:52:09 by gloras-t          #+#    #+#              #
-#    Updated: 2020/08/24 00:45:39 by slindgre         ###   ########.fr        #
+#    Updated: 2020/10/04 02:23:38 by slindgre         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ FT_PRINTF = $(INCLUDES)/ft_printf
 LIBFTP = $(FT_PRINTF)/libftp.a
 LIBFT = $(INCLUDES)/libft
 OBJ_SRC_DIR = obj_src
-OBJ_SRC = $(addprefix $(OBJ_SRC_DIR)/, utils.o parse_args.o path_utils.o sort_list.o)
+OBJ_SRC = $(addprefix $(OBJ_SRC_DIR)/, utils.o parse_args.o path_utils.o sort_list.o print_dir.o)
 
 FLAGS = -Wall -Werror -Wextra
 

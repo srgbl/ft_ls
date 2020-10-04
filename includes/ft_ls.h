@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 20:57:11 by gloras-t          #+#    #+#             */
-/*   Updated: 2020/10/04 02:19:50 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/10/04 03:05:04 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,18 @@ void	print_file_name(t_list *list);
 */
 void	verify_paths(t_list *paths, t_list **dirs, t_list **files, uint8_t options);
 void	ft_lst_free_file(void *elem, size_t content_size);
+void	print_error(int err, char *path);
+void	map_to_file(t_stat buf, char *path, t_file *file);
 
 /*
 ** sort_list.c
 */
 void	sort_list(t_list **list, int (*sort)(t_list*, t_list*));
 int     sort_files(t_list *a, t_list *b);
+
+/*
+** print_dir.c
+*/
+t_list	*read_dir(t_list *dir, uint8_t options);
 
 #endif
