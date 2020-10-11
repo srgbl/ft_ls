@@ -6,19 +6,20 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 20:26:02 by slindgre          #+#    #+#             */
-/*   Updated: 2020/10/04 01:19:40 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/10/11 19:11:46 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void	print_error(int err, t_list *path)
+void	print_error(int err, char *path)
 {
 	if (err == ENOENT)
-	{
 		ft_printf("ft_ls: cannot access '%s': %s\n",
-				path->content, strerror(errno));
-	}
+				path, strerror(err));
+	if (err == EACCES)
+		ft_printf("ft_ls: cannot access '%s': %s\n",
+				path, strerror(err));
 }
 
 void	ft_lst_free_file(void *elem, size_t content_size)
@@ -71,31 +72,30 @@ void	ft_lst_del_elem(t_list **list, t_list **needle)
 	}
 }
 
-void	verify_paths(t_list **paths, t_list **files, uint8_t options)
+void	verify_paths(t_list *path, t_list **dirs, t_list **files,
+uint8_t options)
 {
 	t_stat	buf;
 	t_file	file;
-	t_list	*path;
 	int		(*stat_func)(const char *, struct stat *);
 
-	path = *paths;
 	stat_func = (options & OPT_LOWER_L) ? stat : lstat;
 	while (path != NULL)
 	{
 		errno = 0;
 		stat_func(path->content, &buf);
-		if (errno == ENOENT)
+		if (errno)
 		{
-			print_error(errno, path);
-			ft_lst_del_elem(paths, &path);
-		}
-		else if ((buf.st_mode & __S_IFMT) != __S_IFDIR)
-		{
-			map_to_file(buf, path->content, &file);
-			ft_lstadd(files, ft_lstnew(&file, sizeof(file)));
-			ft_lst_del_elem(paths, &path);
+			print_error(errno, path->content);
 		}
 		else
-			path = path->next;
+		{
+			map_to_file(buf, path->content, &file);
+			if ((buf.st_mode & __S_IFMT) != __S_IFDIR)
+				ft_lstadd(files, ft_lstnew(&file, sizeof(file)));
+			else
+				ft_lstadd(dirs, ft_lstnew(&file, sizeof(file)));
+		}
+		path = path->next;
 	}
 }
