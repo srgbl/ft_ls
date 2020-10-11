@@ -6,7 +6,7 @@
 #    By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/01 20:52:09 by gloras-t          #+#    #+#              #
-#    Updated: 2020/08/24 00:45:39 by slindgre         ###   ########.fr        #
+#    Updated: 2020/10/04 01:34:21 by slindgre         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ FT_PRINTF = $(INCLUDES)/ft_printf
 LIBFTP = $(FT_PRINTF)/libftp.a
 LIBFT = $(INCLUDES)/libft
 OBJ_SRC_DIR = obj_src
-OBJ_SRC = $(addprefix $(OBJ_SRC_DIR)/, utils.o parse_args.o path_utils.o sort_list.o)
+OBJ_SRC = $(addprefix $(OBJ_SRC_DIR)/, utils.o parse_args.o path_utils.o sort_list.o print_utils.o)
 
 FLAGS = -Wall -Werror -Wextra
 
@@ -33,7 +33,7 @@ $(FT_LS): $(OBJ_SRC_DIR) $(LIBFTP) $(OBJ_SRC_DIR)/main.o $(OBJ_SRC)
 $(OBJ_SRC_DIR):
 	@mkdir $(OBJ_SRC_DIR)
 
-$(OBJ_SRC_DIR)/%.o: src/%.c includes/ft_ls.h
+$(OBJ_SRC_DIR)/%.o: src/%.c includes/ft_ls.h includes/ft_ls_defines.h
 	@gcc -c $(FLAGS) -I $(INCLUDES) -I $(LIBFT) $< -o $@ -g
 
 $(LIBFTP):

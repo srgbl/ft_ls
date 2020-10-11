@@ -6,41 +6,14 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 20:57:11 by gloras-t          #+#    #+#             */
-/*   Updated: 2020/08/24 00:34:57 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/10/04 01:33:18 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_LS_H
 # define FT_LS_H
 
-# include <dirent.h>
-# include <stdio.h>
-# include <stdint.h>
-# include <sys/stat.h>
-# include <errno.h>
-# include "libft.h"
-
-typedef struct dirent	t_dirent;
-typedef struct stat		t_stat;
-# define USER           "USER"
-# define OPT_LOWER_A    1
-# define OPT_LOWER_L    2
-# define OPT_LOWER_R    4
-# define OPT_LOWER_T    8
-# define OPT_UPPER_R    16
-# define OPTIONS        "alrtR"
-
-typedef struct	s_file
-{
-	char        *name;
-	int     	type;
-	int     	visibility;
-	long    	last_modified;
-	long		gid;
-	long		uid;
-	int     	n_links;
-	int     	size;
-}				t_file;
+# include "ft_ls_defines.h"
 
 int		ft_printf(const char *restrict format, ...);
 
@@ -67,7 +40,13 @@ void	ft_lst_free_file(void *elem, size_t content_size);
 ** sort_list.c
 */
 void	sort_list(t_list **list, int (*sort)(t_list*, t_list*));
-int     sort_paths(t_list *a, t_list *b);
-int     sort_files(t_list *a, t_list *b);
+int		sort_paths(t_list *a, t_list *b);
+int		sort_files(t_list *a, t_list *b);
+
+/*
+** print_utils.c
+*/
+void	print_file_info(t_file *file, uint8_t options);
+void	print_files(t_list *files, uint8_t options);
 
 #endif
