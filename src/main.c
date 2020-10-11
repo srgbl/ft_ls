@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 20:56:02 by gloras-t          #+#    #+#             */
-/*   Updated: 2020/10/11 19:18:30 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/10/11 22:40:23 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,16 @@ int	main(int argc, char **argv)
 	files = NULL;
 	options = 0;
 	parse_args(argc, argv, &paths, &options);
-	verify_paths(paths, &dirs, &files, options);
+	if (verify_paths(paths, &dirs, &files, options) > 0)
+		options |= OPT_NEW_LINE;
 	ft_lstdel(&paths, ft_lst_free_elem);
 	sort_list(&dirs, sort_files);
 	sort_list(&files, sort_files);
-	print_files(files, options | OPT_LOWER_A);
+	if (print_files(files, options | OPT_LOWER_A) > 0)
+		options |= OPT_NEW_LINE;
 	ft_lstdel(&files, ft_lst_free_file);
-	ft_lstiter(read_dir(dirs, options), print_file_name);
+	print_dirs(dirs, options);
+	//ft_lstiter(read_dir(dirs, options), print_file_name);
 	ft_lstdel(&dirs, ft_lst_free_file);
 	return (0);
 }

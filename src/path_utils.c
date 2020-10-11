@@ -6,20 +6,24 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 20:26:02 by slindgre          #+#    #+#             */
-/*   Updated: 2020/10/11 19:11:46 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/10/11 23:10:42 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void	print_error(int err, char *path)
+int		print_error(int err, char *path)
 {
+	int	res;
+
+	res = 0;
 	if (err == ENOENT)
-		ft_printf("ft_ls: cannot access '%s': %s\n",
+		res = ft_printf("ft_ls: cannot access '%s': %s\n",
 				path, strerror(err));
 	if (err == EACCES)
-		ft_printf("ft_ls: cannot access '%s': %s\n",
+		res = ft_printf("ft_ls: cannot access '%s': %s\n",
 				path, strerror(err));
+	return (res);
 }
 
 void	ft_lst_free_file(void *elem, size_t content_size)
@@ -39,6 +43,7 @@ void	map_to_file(t_stat buf, char *path, t_file *file)
 	file->gid = buf.st_gid;
 	file->uid = buf.st_uid;
 	file->last_modified = buf.st_mtime;
+	file->visibility = FALSE;
 	if (path[0] != '.')
 		file->visibility = TRUE;
 }
@@ -72,22 +77,22 @@ void	ft_lst_del_elem(t_list **list, t_list **needle)
 	}
 }
 
-void	verify_paths(t_list *path, t_list **dirs, t_list **files,
+int		verify_paths(t_list *path, t_list **dirs, t_list **files,
 uint8_t options)
 {
 	t_stat	buf;
 	t_file	file;
 	int		(*stat_func)(const char *, struct stat *);
+	int		res;
 
+	res = 0;
 	stat_func = (options & OPT_LOWER_L) ? stat : lstat;
 	while (path != NULL)
 	{
 		errno = 0;
 		stat_func(path->content, &buf);
 		if (errno)
-		{
-			print_error(errno, path->content);
-		}
+			res += print_error(errno, path->content);
 		else
 		{
 			map_to_file(buf, path->content, &file);
@@ -98,4 +103,5 @@ uint8_t options)
 		}
 		path = path->next;
 	}
+	return (res);
 }

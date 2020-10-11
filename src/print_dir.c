@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/04 02:23:45 by slindgre          #+#    #+#             */
-/*   Updated: 2020/10/04 03:05:48 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/10/11 23:10:55 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,14 @@ t_list	*get_files(char *dir_name, DIR *dir_stream, uint8_t options)
 	return (files);
 }
 
-t_list	*read_dir(t_list *list, uint8_t options)
+t_list	*read_dir(t_file *dir, uint8_t options)
 {
-	t_file	*dir;
 	t_list	*files;
 	char	*temp;
 	DIR		*dir_stream;
 
-	if (list == NULL)
+	if (dir == NULL)
 		return (NULL);
-	dir = (t_file*)list->content;
 	if (dir->name[ft_strlen(dir->name) - 1] != '/')
 	{
 		temp = ft_strjoin(dir->name, "/");
@@ -70,4 +68,28 @@ t_list	*read_dir(t_list *list, uint8_t options)
 		files = get_files(dir->name, dir_stream, options);
 	closedir(dir_stream);
 	return (files);
+}
+
+void	print_dirs(t_list *dirs, uint8_t options)
+{
+	t_list	*files;
+	t_file	*dir;
+	int		i;
+
+	i = 0;
+	files = NULL;
+	while (dirs)
+	{
+		dir = (t_file*)dirs->content;
+		if (i != 0 || options & OPT_NEW_LINE)
+			ft_printf("\n");
+		if (!(i == 0 && dirs->next == NULL))
+			ft_printf("%s:\n", dir->name);
+		files = read_dir(dir, options);
+		sort_list(&files, sort_files);
+		print_files(files, options);
+		ft_lstdel(&files, ft_lst_free_file);
+		dirs = dirs->next;
+		i++;
+	}
 }
