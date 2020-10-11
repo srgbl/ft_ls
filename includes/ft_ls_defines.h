@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 20:57:11 by gloras-t          #+#    #+#             */
-/*   Updated: 2020/10/11 22:25:54 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/10/12 00:49:41 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct			s_file
 	long				uid;
 	int					n_links;
 	int					size;
+	char				*prefix;
 }						t_file;
 
 #endif
