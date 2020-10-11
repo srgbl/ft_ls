@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 20:26:02 by slindgre          #+#    #+#             */
-/*   Updated: 2020/10/04 02:39:30 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/10/11 19:11:46 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,14 @@ void	map_to_file(t_stat buf, char *path, t_file *file)
 {
 	file->name = ft_strdup(path);
 	file->type = buf.st_mode & __S_IFMT;
+	file->mode = buf.st_mode;
 	file->n_links = buf.st_nlink;
 	file->size = buf.st_size;
 	file->gid = buf.st_gid;
 	file->uid = buf.st_uid;
 	file->last_modified = buf.st_mtime;
+	if (path[0] != '.')
+		file->visibility = TRUE;
 }
 
 void	ft_lst_del_elem(t_list **list, t_list **needle)
