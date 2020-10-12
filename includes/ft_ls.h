@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 20:57:11 by gloras-t          #+#    #+#             */
-/*   Updated: 2020/10/12 02:06:32 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/10/13 00:21:43 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ int		parse_args(int argc, char *argv[], t_list **paths, uint8_t *options);
 /*
 ** utils.c
 */
-int		print_all_file_in_dir(char *dir_name);
-char	*get_env_by_name(char *envp[], char *name);
-void	println(char *line);
-void	print_file_name(t_list *list);
+int		sort_files_by_name_asc(t_list *a, t_list *b);
+int		sort_files_by_time_asc(t_list *a, t_list *b);
+int		sort_files_by_name_desc(t_list *a, t_list *b);
+int		sort_files_by_time_desc(t_list *a, t_list *b);
 
 /*
 ** path_utils.c
@@ -43,8 +43,7 @@ int		is_dot_path(char *path);
 /*
 ** sort_list.c
 */
-void	sort_list(t_list **list, int (*sort)(t_list*, t_list*));
-int		sort_files(t_list *a, t_list *b);
+void	sort_list(t_list **list, uint8_t options);
 
 /*
 ** print_file.c

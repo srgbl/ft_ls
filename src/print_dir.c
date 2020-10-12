@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/04 02:23:45 by slindgre          #+#    #+#             */
-/*   Updated: 2020/10/12 23:35:47 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/10/12 23:57:50 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	print_dirs(t_list *dirs, uint8_t options, int step)
 			if (!(i == 0 && dirs->next == NULL) || options & OPT_UPPER_R)
 				ft_printf("%s:\n", dir->name);
 			files = read_dir(dir, options);
-			sort_list(&files, sort_files);
+			sort_list(&files, options);
 			print_files(files, options);
 			if (options & OPT_UPPER_R)
 				print_dirs(files, options, step + 1);

@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/26 15:19:04 by slindgre          #+#    #+#             */
-/*   Updated: 2020/10/12 23:36:18 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/10/13 01:05:39 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int		print_files(t_list *list, uint8_t options)
 			print_file_info(file, options);
 			i++;
 		}
-		if ((i != 0 && i % carry == 0) || list->next == NULL)
+		if ((i != 0 && i % carry == 0) || (list->next == NULL && i != 0))
 		{
 			ft_printf("\n");
 			options |= OPT_NEW_LINE;

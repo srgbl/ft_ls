@@ -6,51 +6,52 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 21:49:25 by gloras-t          #+#    #+#             */
-/*   Updated: 2020/08/24 02:38:24 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/10/13 01:04:33 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-int		print_all_file_in_dir(char *dir_name)
+int		sort_files_by_name_asc(t_list *a, t_list *b)
 {
-	DIR			*dirp;
-	t_dirent	*dp;
+	t_file *a_file;
+	t_file *b_file;
 
-	dirp = opendir(dir_name);
-	if (dirp == 0)
-		return (-1);
-	while ((dp = readdir(dirp)) != 0)
-		println(dp->d_name);
-	closedir(dirp);
-	return (1);
+	a_file = (t_file*)a->content;
+	b_file = (t_file*)b->content;
+	return (ft_strcmp(a_file->name, b_file->name));
 }
 
-char	*get_env_by_name(char *envp[], char *name)
+int		sort_files_by_time_asc(t_list *a, t_list *b)
 {
-	int	i;
-	int	sep_pos;
+	t_file *a_file;
+	t_file *b_file;
 
-	i = 0;
-	while (envp[i])
-	{
-		sep_pos = ft_strchrind(envp[i], '='); //check if not found
-		if (!ft_strncmp(envp[i], name, sep_pos))
-			return (ft_strsub(envp[i], sep_pos + 1, ft_strlen(envp[i])));
-		i++;
-	}
-	return (NULL);
+	a_file = (t_file*)a->content;
+	b_file = (t_file*)b->content;
+	if (a_file->last_modified == b_file->last_modified)
+		return (0);
+	return (a_file->last_modified < b_file->last_modified ? 1 : -1);
 }
 
-void	println(char *line)
+int		sort_files_by_name_desc(t_list *a, t_list *b)
 {
-	ft_printf("%s\n", line);
+	t_file *a_file;
+	t_file *b_file;
+
+	a_file = (t_file*)a->content;
+	b_file = (t_file*)b->content;
+	return (!ft_strcmp(a_file->name, b_file->name));
 }
 
-void	print_file_name(t_list *list)
+int		sort_files_by_time_desc(t_list *a, t_list *b)
 {
-	t_file *file;
+	t_file *a_file;
+	t_file *b_file;
 
-	file = (t_file*)list->content;
-	ft_printf("%s\n", file->name);
+	a_file = (t_file*)a->content;
+	b_file = (t_file*)b->content;
+	if (a_file->last_modified == b_file->last_modified)
+		return (0);
+	return (a_file->last_modified > b_file->last_modified ? 1 : -1);
 }
