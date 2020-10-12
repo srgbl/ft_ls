@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 20:26:02 by slindgre          #+#    #+#             */
-/*   Updated: 2020/10/11 19:11:43 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/10/13 00:22:31 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,6 @@ void	swap_arr_elems(t_list **a, t_list **b)
 	tmp = *a;
 	*a = *b;
 	*b = tmp;
-}
-
-int		sort_files(t_list *a, t_list *b)
-{
-	t_file *a_file;
-	t_file *b_file;
-
-	a_file = (t_file*)a->content;
-	b_file = (t_file*)b->content;
-	return (ft_strcmp(a_file->name, b_file->name));
 }
 
 void	quick_sort(t_list **list_arr, int low, int high,
@@ -58,7 +48,7 @@ void	quick_sort(t_list **list_arr, int low, int high,
 		quick_sort(list_arr, i, high, sort);
 }
 
-void	sort_list(t_list **list, int (*sort)(t_list*, t_list*))
+void	sort_list_by(t_list **list, int (*sort)(t_list*, t_list*))
 {
 	t_list	**list_arr;
 	t_list	*tmp;
@@ -85,4 +75,20 @@ void	sort_list(t_list **list, int (*sort)(t_list*, t_list*))
 	list_arr[size - 1]->next = NULL;
 	*list = list_arr[0];
 	free(list_arr);
+}
+
+void	sort_list(t_list **list, uint8_t options)
+{
+	int (*sort_func)(t_list*, t_list*);
+
+	sort_func = sort_files_by_name_asc;
+	if (options & OPT_LOWER_R)
+		sort_func = sort_files_by_name_desc;
+	if (options & OPT_LOWER_T)
+	{
+		sort_func = sort_files_by_time_asc;
+		if (options & OPT_LOWER_R)
+			sort_func = sort_files_by_time_desc;
+	}
+	sort_list_by(list, sort_func);
 }
