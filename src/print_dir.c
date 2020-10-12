@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/04 02:23:45 by slindgre          #+#    #+#             */
-/*   Updated: 2020/10/12 02:05:22 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/10/12 23:35:47 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	print_dirs(t_list *dirs, uint8_t options, int step)
 	while (dirs)
 	{
 		dir = (t_file*)dirs->content;
-		if (dir->type == __S_IFDIR && ((!is_dot_path(dir->name) &&
+		if (dir->type == S_IFDIR && ((!is_dot_path(dir->name) &&
 		(dir->visibility == TRUE || options & OPT_LOWER_A)) || step == 0))
 		{
 			print_header(i, step, dir, options);
