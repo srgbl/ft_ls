@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 20:26:02 by slindgre          #+#    #+#             */
-/*   Updated: 2020/10/12 02:06:19 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/10/12 23:37:03 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	ft_lst_free_file(void *elem, size_t content_size)
 void	map_to_file(t_stat buf, char *path, char *prefix, t_file *file)
 {
 	file->name = ft_strdup(path);
-	file->type = buf.st_mode & __S_IFMT;
+	file->type = buf.st_mode & S_IFMT;
 	file->mode = buf.st_mode;
 	file->n_links = buf.st_nlink;
 	file->size = buf.st_size;
@@ -76,7 +76,7 @@ uint8_t options)
 		else
 		{
 			map_to_file(buf, path->content, "", &file);
-			if ((buf.st_mode & __S_IFMT) != __S_IFDIR)
+			if ((buf.st_mode & S_IFMT) != S_IFDIR)
 				ft_lstadd(files, ft_lstnew(&file, sizeof(file)));
 			else
 				ft_lstadd(dirs, ft_lstnew(&file, sizeof(file)));

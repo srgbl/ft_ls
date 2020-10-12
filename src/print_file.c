@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_utils.c                                      :+:      :+:    :+:   */
+/*   print_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/26 15:19:04 by slindgre          #+#    #+#             */
-/*   Updated: 2020/10/11 23:11:07 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/10/12 23:36:18 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	print_file_info(t_file *file, uint8_t options)
 			group_name = group->gr_name;
 		time = ctime(&file->last_modified);
 		time[ft_strlen(time) - 1] = '\0';
-		ft_printf("%c", (file->type == __S_IFDIR) ? 'd' : '-');
+		ft_printf("%c", (file->type == S_IFDIR) ? 'd' : '-');
 		print_acl(file->mode);
 		ft_printf("\t%d\t%s\t%s\t%#10d %s ",
 		file->n_links, user_name,
