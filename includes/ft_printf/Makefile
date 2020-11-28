@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+         #
+#    By: gloras-t <gloras-t@student.21-school.ru    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/01 12:49:11 by gloras-t          #+#    #+#              #
-#    Updated: 2020/07/03 21:46:39 by slindgre         ###   ########.fr        #
+#    Updated: 2020/11/01 20:42:38 by gloras-t         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libftp.a
+NAME = libftprintf.a
 
 TEST = t
 

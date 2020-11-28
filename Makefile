@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+         #
+#    By: gloras-t <gloras-t@student.21-school.ru    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/01 20:52:09 by gloras-t          #+#    #+#              #
-#    Updated: 2020/10/12 02:04:37 by slindgre         ###   ########.fr        #
+#    Updated: 2020/11/29 02:17:14 by gloras-t         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-FT_LS = ft_ls
+NAME = ft_ls
 INCLUDES = includes
 FT_PRINTF = $(INCLUDES)/ft_printf
-LIBFTP = $(FT_PRINTF)/libftp.a
+LIBFTP = $(FT_PRINTF)/libftprintf.a
 LIBFT = $(INCLUDES)/libft
 OBJ_SRC_DIR = obj_src
 OBJ_SRC = $(addprefix $(OBJ_SRC_DIR)/, utils.o parse_args.o path_utils.o sort_list.o print_dir.o print_file.o)
@@ -24,10 +24,10 @@ ITALIC = \033[3m
 GREEN = \033[0;32m
 EOC = \033[0m
 
-all: $(FT_LS)
+all: $(NAME)
 	
-$(FT_LS): $(OBJ_SRC_DIR) $(LIBFTP) $(OBJ_SRC_DIR)/main.o $(OBJ_SRC)
-	@gcc $(FLAGS) -o $(FT_LS) $(OBJ_SRC_DIR)/main.o $(OBJ_SRC) -I $(INCLUDES) -I $(LIBFT) -L $(FT_PRINTF)/ -lftp -g
+$(NAME): $(OBJ_SRC_DIR) $(LIBFTP) $(OBJ_SRC_DIR)/main.o $(OBJ_SRC)
+	@gcc $(FLAGS) -o $(NAME) $(OBJ_SRC_DIR)/main.o $(OBJ_SRC) -I $(INCLUDES) -I $(LIBFT) -L $(FT_PRINTF)/ -lftprintf -g
 	@echo "$(GREEN)complete:$(EOC) $(ITALIC)FT_LS$(EOC)"
 
 $(OBJ_SRC_DIR):
@@ -45,6 +45,6 @@ clean:
 	
 fclean: clean
 	@make -sC $(FT_PRINTF) fclean
-	@rm -f $(FT_LS)
+	@rm -f $(NAME)
 	
 re: fclean all
