@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gloras-t <gloras-t@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 20:26:02 by slindgre          #+#    #+#             */
-/*   Updated: 2020/10/12 23:37:03 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/11/29 17:33:45 by gloras-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,7 @@ void	map_to_file(t_stat buf, char *path, char *prefix, t_file *file)
 	file->uid = buf.st_uid;
 	file->last_modified = buf.st_mtime;
 	file->prefix = ft_strdup(prefix);
-	file->visibility = FALSE;
-	if (path[0] != '.')
-		file->visibility = TRUE;
+	file->visibility = (path[0] != '.') ? TRUE : FALSE;
 }
 
 int		is_dot_path(char *path)
@@ -76,7 +74,7 @@ uint8_t options)
 		else
 		{
 			map_to_file(buf, path->content, "", &file);
-			if ((buf.st_mode & S_IFMT) != S_IFDIR)
+			if ((file.type & S_IFMT) != S_IFDIR)
 				ft_lstadd(files, ft_lstnew(&file, sizeof(file)));
 			else
 				ft_lstadd(dirs, ft_lstnew(&file, sizeof(file)));
