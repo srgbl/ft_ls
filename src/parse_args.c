@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gloras-t <gloras-t@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 11:35:28 by gloras-t          #+#    #+#             */
-/*   Updated: 2020/08/23 18:39:43 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/11/29 17:06:02 by gloras-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ int			parse_args(int argc, char *argv[], t_list **paths, uint8_t *options)
 		{
 			if (parse_options(argv[i] + 1, options) == -1)
 			{
-				ft_printf("ft_ls: invalid option -- '%c'\n");
+				ft_printf("ft_ls: illegal option -- %c\n");
+				ft_printf("usage: ./ft_ls [-%s] [file ...]\n", OPTIONS);
 				ft_lstdel(paths, ft_lst_free_elem);
 				exit(-1);
 			}

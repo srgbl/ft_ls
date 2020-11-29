@@ -1,3 +1,5 @@
 .vscode/
 *.dSYM/
 *.swp
+.DS_Store
+
