@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort_list.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gloras-t <gloras-t@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 20:26:02 by slindgre          #+#    #+#             */
-/*   Updated: 2020/10/13 00:22:31 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/06 00:44:17 by gloras-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	swap_arr_elems(t_list **a, t_list **b)
 }
 
 void	quick_sort(t_list **list_arr, int low, int high,
-					int (*sort)(t_list*, t_list*))
+					int (*comparator)(t_list*, t_list*))
 {
 	int		i;
 	int		j;
@@ -35,20 +35,20 @@ void	quick_sort(t_list **list_arr, int low, int high,
 	mid = list_arr[(high + low) / 2];
 	while (i <= j)
 	{
-		while (sort(list_arr[i], mid) < 0 && i < high)
+		while (comparator(list_arr[i], mid) < 0 && i < high)
 			i++;
-		while (sort(list_arr[j], mid) > 0)
+		while (comparator(list_arr[j], mid) > 0)
 			j--;
 		if (i <= j)
 			swap_arr_elems(&list_arr[i++], &list_arr[j--]);
 	}
 	if (low < i - 1)
-		quick_sort(list_arr, low, i - 1, sort);
+		quick_sort(list_arr, low, i - 1, comparator);
 	if (i < high)
-		quick_sort(list_arr, i, high, sort);
+		quick_sort(list_arr, i, high, comparator);
 }
 
-void	sort_list_by(t_list **list, int (*sort)(t_list*, t_list*))
+void	sort_list_by(t_list **list, int (*comparator)(t_list*, t_list*))
 {
 	t_list	**list_arr;
 	t_list	*tmp;
@@ -66,7 +66,7 @@ void	sort_list_by(t_list **list, int (*sort)(t_list*, t_list*))
 		list_arr[i++] = tmp;
 		tmp = tmp->next;
 	}
-	quick_sort(list_arr, 0, size - 1, sort);
+	quick_sort(list_arr, 0, size - 1, comparator);
 	while (i > 1)
 	{
 		list_arr[size - i]->next = list_arr[size - i + 1];
@@ -79,16 +79,16 @@ void	sort_list_by(t_list **list, int (*sort)(t_list*, t_list*))
 
 void	sort_list(t_list **list, uint8_t options)
 {
-	int (*sort_func)(t_list*, t_list*);
+	int (*comparator)(t_list*, t_list*);
 
-	sort_func = sort_files_by_name_asc;
+	comparator = compare_by_name_asc;
 	if (options & OPT_LOWER_R)
-		sort_func = sort_files_by_name_desc;
+		comparator = compare_by_name_desc;
 	if (options & OPT_LOWER_T)
 	{
-		sort_func = sort_files_by_time_asc;
+		comparator = compare_by_time_asc;
 		if (options & OPT_LOWER_R)
-			sort_func = sort_files_by_time_desc;
+			comparator = compare_by_time_desc;
 	}
-	sort_list_by(list, sort_func);
+	sort_list_by(list, comparator);
 }

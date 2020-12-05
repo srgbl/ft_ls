@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ls.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gloras-t <gloras-t@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 20:57:11 by gloras-t          #+#    #+#             */
-/*   Updated: 2020/10/13 00:21:43 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/06 00:40:45 by gloras-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,16 @@ int		ft_printf(const char *restrict format, ...);
 /*
 ** parse_args.c
 */
-int		parse_args(int argc, char *argv[], t_list **paths, uint8_t *options);
+int		parse_options(char *arg, uint8_t *options);
+void	parse_args(int argc, char *argv[], t_list **paths, uint8_t *options);
 
 /*
 ** utils.c
 */
-int		sort_files_by_name_asc(t_list *a, t_list *b);
-int		sort_files_by_time_asc(t_list *a, t_list *b);
-int		sort_files_by_name_desc(t_list *a, t_list *b);
-int		sort_files_by_time_desc(t_list *a, t_list *b);
+int		compare_by_name_asc(t_list *a, t_list *b);
+int		compare_by_time_asc(t_list *a, t_list *b);
+int		compare_by_name_desc(t_list *a, t_list *b);
+int		compare_by_time_desc(t_list *a, t_list *b);
 
 /*
 ** path_utils.c

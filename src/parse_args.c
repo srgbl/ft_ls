@@ -6,7 +6,7 @@
 /*   By: gloras-t <gloras-t@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 11:35:28 by gloras-t          #+#    #+#             */
-/*   Updated: 2020/11/29 17:06:02 by gloras-t         ###   ########.fr       */
+/*   Updated: 2020/12/06 00:21:35 by gloras-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 **	если первый символ "-" то отдаем этой функции
 */
 
-static int	parse_options(char *arg, uint8_t *options)
+int		parse_options(char *arg, uint8_t *options)
 {
 	int	ind;
 
@@ -31,7 +31,7 @@ static int	parse_options(char *arg, uint8_t *options)
 	return (0);
 }
 
-int			parse_args(int argc, char *argv[], t_list **paths, uint8_t *options)
+void	parse_args(int argc, char *argv[], t_list **paths, uint8_t *options)
 {
 	int	i;
 
@@ -54,5 +54,4 @@ int			parse_args(int argc, char *argv[], t_list **paths, uint8_t *options)
 	}
 	if (ft_lstsize(*paths) == 0)
 		ft_lstadd_back(paths, ".", 2);
-	return (0);
 }
