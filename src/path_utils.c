@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 20:26:02 by slindgre          #+#    #+#             */
-/*   Updated: 2020/12/19 16:48:35 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/20 00:43:50 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,23 @@ int		print_error(int err, char *path)
 	if (err == ENOENT)
 		res = ft_printf("ft_ls: cannot access '%s': %s\n",
 				path, strerror(err));
-	if (err == EACCES)
+	else if (err == EACCES)
 		res = ft_printf("ft_ls: cannot access '%s': %s\n",
+				path, strerror(err));
+	else
+		res = ft_printf("ft_ls: error '%s': %s\n",
 				path, strerror(err));
 	return (res);
 }
 
 void	ft_lst_free_file(void *elem, size_t content_size)
 {
-	ft_strdel(&(((t_file*)elem)->name));
-	ft_strdel(&(((t_file*)elem)->prefix));
+	if ((((t_file*)elem)->name) != NULL)
+		ft_strdel(&(((t_file*)elem)->name));
+	if ((((t_file*)elem)->prefix) != NULL)
+		ft_strdel(&(((t_file*)elem)->prefix));
+	if ((((t_file*)elem)->target_path) != NULL)
+		ft_strdel(&(((t_file*)elem)->target_path));
 	ft_bzero(elem, content_size);
 	ft_memdel(&elem);
 }
@@ -46,6 +53,8 @@ void	map_to_file(t_stat buf, char *path, char *prefix, t_file *file)
 	file->last_modified = buf.st_mtime;
 	file->prefix = ft_strdup(prefix);
 	file->visibility = (path[0] != '.') ? TRUE : FALSE;
+	file->invalid = FALSE;
+	file->target_path = NULL;
 }
 
 int		is_dot_path(char *path)

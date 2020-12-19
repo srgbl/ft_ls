@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/04 02:23:45 by slindgre          #+#    #+#             */
-/*   Updated: 2020/10/12 23:57:50 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/20 00:47:58 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,23 @@ t_file	get_file(char *prefix, char *file_name, uint8_t options)
 	t_stat	buf;
 	char	*path;
 	int		(*stat_func)(const char *, struct stat *);
+	char	*target;
 
 	errno = 0;
 	path = ft_strjoin(prefix, file_name);
-	stat_func = (options & OPT_LOWER_L) ? stat : lstat;
+	stat_func = (options & OPT_LOWER_L) ? lstat : stat;
 	stat_func(path, &buf);
-	if (errno)
-		print_error(errno, path);
 	map_to_file(buf, file_name, prefix, &file);
+	if (errno)
+	{
+		print_error(errno, path);
+		file.invalid = TRUE;
+	}
+	else if (file.mode & S_IFLNK && (target = ft_strnew(buf.st_size)) != NULL)
+	{
+		readlink(path, target, buf.st_size);
+		file.target_path = target;
+	}
 	free(path);
 	return (file);
 }
