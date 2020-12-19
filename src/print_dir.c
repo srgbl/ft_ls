@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/04 02:23:45 by slindgre          #+#    #+#             */
-/*   Updated: 2020/12/20 00:47:58 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/20 01:33:18 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ t_file	get_file(char *prefix, char *file_name, uint8_t options)
 		print_error(errno, path);
 		file.invalid = TRUE;
 	}
-	else if (file.mode & S_IFLNK && (target = ft_strnew(buf.st_size)) != NULL)
+	else if (file.mode == S_IFLNK && (target = ft_strnew(PATH_LEN)) != NULL)
 	{
-		readlink(path, target, buf.st_size);
+		readlink(path, target, PATH_LEN);
 		file.target_path = target;
 	}
 	free(path);

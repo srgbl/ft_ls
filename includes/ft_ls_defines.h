@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 20:57:11 by gloras-t          #+#    #+#             */
-/*   Updated: 2020/12/20 00:54:19 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/20 01:32:24 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@
 # define FILES_PER_ROW	1
 # define MODES_LEN		9
 # define MODES			"rwxrwxrwx"
+# define PATH_LEN		1024
 
 typedef struct dirent	t_dirent;
 typedef struct stat		t_stat;
