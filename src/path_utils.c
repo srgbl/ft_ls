@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gloras-t <gloras-t@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 20:26:02 by slindgre          #+#    #+#             */
-/*   Updated: 2020/11/29 17:33:45 by gloras-t         ###   ########.fr       */
+/*   Updated: 2020/12/19 16:48:35 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ uint8_t options)
 		else
 		{
 			map_to_file(buf, path->content, "", &file);
-			if ((file.type & S_IFMT) != S_IFDIR)
+			if (file.type != S_IFDIR)
 				ft_lstadd(files, ft_lstnew(&file, sizeof(file)));
 			else
 				ft_lstadd(dirs, ft_lstnew(&file, sizeof(file)));

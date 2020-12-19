@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gloras-t <gloras-t@student.21-school.ru    +#+  +:+       +#+         #
+#    By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/01 20:52:09 by gloras-t          #+#    #+#              #
-#    Updated: 2020/12/06 00:20:22 by gloras-t         ###   ########.fr        #
+#    Updated: 2020/12/19 17:29:40 by slindgre         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,13 +15,12 @@ TEST = t
 
 INCLUDES = includes
 FT_PRINTF = $(INCLUDES)/ft_printf
-LIBFTP = $(FT_PRINTF)/libftprintf.a
 LIBFT = $(INCLUDES)/libft
 
-SRC = src
-TEST_SRC = test
-TEST_PREFIX = test_
+LIBFTP = $(FT_PRINTF)/libftprintf.a
 
+SRC_DIR = src
+TEST_SRC_DIR = test
 OBJ_SRC_DIR = obj_src
 OBJ_TEST_SRC_DIR = obj_test_src
 
@@ -42,23 +41,24 @@ EOC = \033[0m
 all: $(NAME)
 	
 $(NAME): $(OBJ_SRC_DIR) $(LIBFTP) $(OBJ_SRC_DIR)/main.o $(OBJ_SRC)
-	@gcc $(FLAGS) -o $(NAME) $(OBJ_SRC_DIR)/main.o $(OBJ_SRC) -I $(INCLUDES) -I $(LIBFT) -L $(FT_PRINTF)/ -lftprintf -g
+	@gcc $(FLAGS) -o $(NAME) $(OBJ_SRC_DIR)/main.o $(OBJ_SRC) -I $(INCLUDES) -L $(FT_PRINTF)/ -lftprintf -g
 	@echo "$(GREEN)complete:$(EOC) $(ITALIC)FT_LS$(EOC)"
 
 # make t T=<testfile_name>.o
-$(TEST): $(OBJ_TEST_SRC_DIR) $(OBJ_SRC_DIR) $(OBJ_SRC) $(LIBFTP) $(OBJ_TEST_SRC_DIR)/$(T)
-	@gcc -o $(TEST) $(OBJ_TEST_SRC_DIR)/$(T) $(OBJ_SRC) -I $(INCLUDES) -I $(LIBFT) -L $(FT_PRINTF)/ -lftprintf -g
+$(TEST): $(OBJ_TEST_SRC_DIR) $(OBJ_SRC_DIR) $(LIBFTP) $(OBJ_SRC) $(OBJ_TEST_SRC_DIR)/$(T)
+	@gcc -o $(TEST) $(OBJ_TEST_SRC_DIR)/$(T) $(OBJ_SRC) -I $(INCLUDES) -L $(FT_PRINTF)/ -lftprintf -g
+	@echo "$(GREEN)complete:$(EOC) $(ITALIC)TEST$(EOC)"
 
 $(OBJ_SRC_DIR):
 	@mkdir $(OBJ_SRC_DIR)
 
-$(OBJ_SRC_DIR)/%.o: $(SRC)/%.c includes/ft_ls.h includes/ft_ls_defines.h
+$(OBJ_SRC_DIR)/%.o: $(SRC_DIR)/%.c includes/ft_ls.h includes/ft_ls_defines.h
 	@gcc -c $(FLAGS) -I $(INCLUDES) -I $(LIBFT) $< -o $@ -g
 
 $(OBJ_TEST_SRC_DIR):
 	@mkdir $(OBJ_TEST_SRC_DIR)
 
-$(OBJ_TEST_SRC_DIR)/%.o: $(TEST_SRC)/%.c includes/ft_ls.h includes/ft_ls.h
+$(OBJ_TEST_SRC_DIR)/%.o: $(TEST_SRC_DIR)/%.c includes/ft_ls.h includes/ft_ls_defines.h
 	@gcc -c $(FLAGS) -I $(INCLUDES) -I $(LIBFT) $< -o $@ -g
 
 $(LIBFTP):

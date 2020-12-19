@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_parse_options.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gloras-t <gloras-t@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/05 21:53:53 by gloras-t          #+#    #+#             */
-/*   Updated: 2020/12/05 22:45:19 by gloras-t         ###   ########.fr       */
+/*   Updated: 2020/12/19 17:39:56 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,6 @@ int main()
 	assert(parse_options("abl", &options) == -1);
 	assert(options == (OPT_LOWER_A));
 	
+	ft_printf("Complete all tests\n");
 	return (0);
 }
