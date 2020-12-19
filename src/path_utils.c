@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 20:26:02 by slindgre          #+#    #+#             */
-/*   Updated: 2020/12/20 00:43:50 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/20 01:11:32 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ int		print_error(int err, char *path)
 
 	res = 0;
 	if (err == ENOENT)
-		res = ft_printf("ft_ls: cannot access '%s': %s\n",
-				path, strerror(err));
+		res = ft_printf("ft_ls: cannot access '%s': %s\n%_",
+				path, strerror(err), 2);
 	else if (err == EACCES)
-		res = ft_printf("ft_ls: cannot access '%s': %s\n",
-				path, strerror(err));
+		res = ft_printf("ft_ls: cannot access '%s': %s\n%_",
+				path, strerror(err), 2);
 	else
-		res = ft_printf("ft_ls: error '%s': %s\n",
-				path, strerror(err));
+		res = ft_printf("ft_ls: error '%s': %s\n%_",
+				path, strerror(err), 2);
 	return (res);
 }
 

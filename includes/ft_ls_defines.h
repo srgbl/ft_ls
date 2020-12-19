@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 20:57:11 by gloras-t          #+#    #+#             */
-/*   Updated: 2020/12/20 00:22:04 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/20 00:54:19 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 # define OPTIONS        "alrtR"
 # define FALSE			0
 # define TRUE			1
-# define FILES_PER_ROW	10
+# define FILES_PER_ROW	1
 # define MODES_LEN		9
 # define MODES			"rwxrwxrwx"
 
