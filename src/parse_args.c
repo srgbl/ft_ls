@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gloras-t <gloras-t@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 11:35:28 by gloras-t          #+#    #+#             */
-/*   Updated: 2020/12/06 00:21:35 by gloras-t         ###   ########.fr       */
+/*   Updated: 2020/12/19 19:49:23 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,30 +19,39 @@
 int		parse_options(char *arg, uint8_t *options)
 {
 	int	ind;
+	int	i;
 
+	i = 0;
+	if (*arg == '-')
+		return (-2);
 	while (*arg)
 	{
 		ind = ft_strchrind(OPTIONS, *arg);
 		if (ind == -1)
-			return (-1);
+			return (i + 1);
 		*options |= 1 << ind;
 		arg++;
+		i++;
 	}
-	return (0);
+	return (-1);
 }
 
 void	parse_args(int argc, char *argv[], t_list **paths, uint8_t *options)
 {
 	int	i;
+	int	res;
 
 	i = 1;
 	while (i < argc)
 	{
 		if (ft_strlen(argv[i]) > 1 && argv[i][0] == '-')
 		{
-			if (parse_options(argv[i] + 1, options) == -1)
+			if ((res = parse_options(argv[i] + 1, options)) != -1)
 			{
-				ft_printf("ft_ls: illegal option -- %c\n");
+				if (res == -2)
+					ft_printf("ft_ls: unrecognized option '%s'\n", argv[i]);
+				else
+					ft_printf("ft_ls: invalid option -- '%c'\n", argv[i][res]);
 				ft_printf("usage: ./ft_ls [-%s] [file ...]\n", OPTIONS);
 				ft_lstdel(paths, ft_lst_free_elem);
 				exit(-1);
