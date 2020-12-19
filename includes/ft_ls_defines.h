@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 20:57:11 by gloras-t          #+#    #+#             */
-/*   Updated: 2020/10/12 00:49:41 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/19 20:07:01 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@
 # define FALSE			0
 # define TRUE			1
 # define FILES_PER_ROW	10
-# define ACL_LEN		9
-# define ACL			"rwxrwxrwx"
+# define MODES_LEN		9
+# define MODES			"rwxrwxrwx"
 
 typedef struct dirent	t_dirent;
 typedef struct stat		t_stat;

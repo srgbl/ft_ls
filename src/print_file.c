@@ -6,29 +6,35 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/26 15:19:04 by slindgre          #+#    #+#             */
-/*   Updated: 2020/12/19 19:52:07 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/19 20:16:13 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void	print_acl(int mode)
+void	print_mode(int mode)
 {
-	char		acl[ACL_LEN];
-	static int	modes[ACL_LEN] = {S_IRUSR, S_IWUSR, S_IXUSR, S_IRGRP, S_IWGRP,
-	S_IXGRP, S_IROTH, S_IWOTH, S_IXOTH};
+	char		modes[MODES_LEN];
+	static int	modes_options[MODES_LEN] = {S_IRUSR, S_IWUSR, S_IXUSR,
+	S_IRGRP, S_IWGRP, S_IXGRP, S_IROTH, S_IWOTH, S_IXOTH};
 	int			i;
 
 	i = 0;
-	while (i < ACL_LEN)
+	while (i < MODES_LEN)
 	{
-		if (!(modes[i] & mode))
-			acl[i] = '-';
+		if (!(modes_options[i] & mode))
+			modes[i] = '-';
 		else
-			acl[i] = ACL[i];
+			modes[i] = MODES[i];
 		i++;
 	}
-	ft_printf("%s", acl);
+	if (mode & S_ISUID)
+		modes[2] = 's';
+	if (mode & S_ISGID)
+		modes[5] = 's';
+	if (mode & S_ISVTX)
+		modes[8] = 't';
+	ft_printf("%s", modes);
 }
 
 void	print_file_info(t_file *file, uint8_t options)
@@ -50,7 +56,7 @@ void	print_file_info(t_file *file, uint8_t options)
 		time = ctime(&file->last_modified);
 		time[ft_strlen(time) - 1] = '\0';
 		ft_printf("%c", (file->type == S_IFDIR) ? 'd' : '-');
-		print_acl(file->mode);
+		print_mode(file->mode);
 		ft_printf("\t%d\t%s\t%s\t%#10d %s ",
 		file->n_links, user_name,
 		group_name, file->size, time);
