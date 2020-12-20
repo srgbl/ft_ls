@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/26 15:19:04 by slindgre          #+#    #+#             */
-/*   Updated: 2020/12/20 03:50:57 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/20 22:35:34 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,13 @@ void	print_valid_file(t_file *file)
 		user_name = user->pw_name;
 	if ((group = getgrgid(file->gid)) != NULL)
 		group_name = group->gr_name;
-	time = ctime(&file->last_modified);
+	time = ctime(&file->mtime_sec);
 	time[ft_strlen(time) - 1] = '\0';
+	if (ft_strlen(time) > 16)
+		time[16] = '\0';
 	print_file_type(file);
 	print_file_mode(file);
-	ft_printf(" %#5d %8s\t%8s\t%#8d %#20s ",
+	ft_printf(" %#5d %8s\t%8s\t%#8d %#12s ",
 	file->n_links, user_name,
 	group_name, file->size, time + 4);
 }
@@ -94,7 +96,7 @@ void	print_file_info(t_file *file, uint8_t options)
 	if (options & OPT_LOWER_L)
 	{
 		if (file->invalid)
-			ft_printf("-????????? %#5s %8s\t%8s\t%#8s %#20s ",
+			ft_printf("-????????? %#5s %8s\t%8s\t%#8s %#12s ",
 		"?", "?", "?", "?", "?");
 		else
 			print_valid_file(file);

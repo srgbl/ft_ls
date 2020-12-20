@@ -33,6 +33,6 @@ int main()
     parse_args(3, args3, &paths, &options);
     assert(ft_lstsize(paths) == 1); //"."
 
-    ft_printf("Complete all tests\n");
+    ft_printf("All tests completed\n");
     return (0);
 }

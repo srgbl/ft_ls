@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 20:26:02 by slindgre          #+#    #+#             */
-/*   Updated: 2020/12/20 03:47:01 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/20 22:54:51 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		print_error(int err, char *path)
 		res = ft_printf("ft_ls: cannot access '%s': %s\n%_",
 				path, strerror(err), 2);
 	else
-		res = ft_printf("ft_ls: error '%s': %s\n%_",
+		res = ft_printf("ft_ls: cannot access '%s': %s\n%_",
 				path, strerror(err), 2);
 	return (res);
 }
@@ -50,7 +50,8 @@ void	map_to_file(t_stat buf, char *path, char *prefix, t_file *file)
 	file->size = buf.st_size;
 	file->gid = buf.st_gid;
 	file->uid = buf.st_uid;
-	file->last_modified = buf.st_mtime;
+	file->mtime_sec = buf.st_mtime;
+	file->mtime_nsec = buf.st_mtim.tv_nsec;
 	file->prefix = ft_strdup(prefix);
 	file->visibility = (path[0] != '.') ? TRUE : FALSE;
 	file->invalid = FALSE;

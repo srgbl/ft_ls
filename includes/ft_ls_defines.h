@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 20:57:11 by gloras-t          #+#    #+#             */
-/*   Updated: 2020/12/20 03:47:04 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/20 22:18:14 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ typedef struct			s_file
 	int					type;
 	int					mode;
 	int					visibility;
-	long				last_modified;
+	long				mtime_sec;
+	long				mtime_nsec;
 	long				gid;
 	long				uid;
 	int					n_links;
