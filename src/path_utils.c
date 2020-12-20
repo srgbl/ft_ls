@@ -6,22 +6,19 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 20:26:02 by slindgre          #+#    #+#             */
-/*   Updated: 2020/12/20 22:54:51 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/20 23:29:22 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-int		print_error(int err, char *path)
+int		print_error(int err, char *path, int mode)
 {
 	int	res;
 
 	res = 0;
-	if (err == ENOENT)
-		res = ft_printf("ft_ls: cannot access '%s': %s\n%_",
-				path, strerror(err), 2);
-	else if (err == EACCES)
-		res = ft_printf("ft_ls: cannot access '%s': %s\n%_",
+	if (err == EACCES && mode == S_IFDIR)
+		res = ft_printf("ft_ls: cannot open directory '%s': %s\n%_",
 				path, strerror(err), 2);
 	else
 		res = ft_printf("ft_ls: cannot access '%s': %s\n%_",
@@ -82,7 +79,7 @@ uint8_t options)
 		errno = 0;
 		stat_func(path->content, &buf);
 		if (errno)
-			res += print_error(errno, path->content);
+			res += print_error(errno, path->content, buf.st_mode & S_IFMT);
 		else
 		{
 			map_to_file(buf, path->content, "", &file);

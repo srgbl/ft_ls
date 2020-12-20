@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/04 02:23:45 by slindgre          #+#    #+#             */
-/*   Updated: 2020/12/20 03:46:53 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/20 23:48:04 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_file	get_file(char *prefix, char *file_name, uint8_t options)
 	map_to_file(buf, file_name, prefix, &file);
 	if (errno)
 	{
-		print_error(errno, path);
+		print_error(errno, path, 0);
 		file.invalid = TRUE;
 		file.blocks = 0;
 		file.size = 0;
@@ -41,42 +41,42 @@ t_file	get_file(char *prefix, char *file_name, uint8_t options)
 	return (file);
 }
 
-t_list	*get_files(char *prefix, DIR *dir_stream, uint8_t options)
+t_list	*get_files(char *path, DIR *dir_stream, uint8_t options)
 {
 	t_dirent	*dirent;
 	t_file		file;
 	t_list		*files;
+	char		*prefix;
 
 	files = NULL;
+	prefix = NULL;
+	if (path[ft_strlen(path) - 1] != '/')
+		prefix = ft_strjoin(path, "/");
+	else
+		prefix = ft_strdup(path);	
 	while ((dirent = readdir(dir_stream)) != NULL)
 	{
 		file = get_file(prefix, dirent->d_name, options);
 		ft_lstadd(&files, ft_lstnew(&file, sizeof(file)));
 	}
+	free(prefix);
 	return (files);
 }
 
 t_list	*read_dir(t_file *dir, uint8_t options)
 {
 	t_list	*files;
-	char	*temp;
 	DIR		*dir_stream;
 	char	*path;
 
 	path = ft_strjoin(dir->prefix, dir->name);
 	while (ft_strlen(path) > 1 && path[ft_strlen(path) - 1] == '/')
 		path[ft_strlen(path) - 1] = '\0';
-	if (path[ft_strlen(path) - 1] != '/')
-	{
-		temp = ft_strjoin(path, "/");
-		free(path);
-		path = temp;
-	}
 	errno = 0;
 	files = NULL;
 	dir_stream = opendir(path);
 	if (errno)
-		print_error(errno, dir->name);
+		print_error(errno, path, S_IFDIR);
 	else
 		files = get_files(path, dir_stream, options);
 	free(path);
@@ -106,12 +106,12 @@ void	print_dirs(t_list *dirs, uint8_t options, int step)
 		if (dir->type == S_IFDIR && ((!is_dot_path(dir->name) &&
 		(dir->visibility == TRUE || options & OPT_LOWER_A)) || step == 0))
 		{
-			print_header(i, step, dir, options);
-			if (!(i == 0 && dirs->next == NULL) || options & OPT_UPPER_R)
+			if ((files = read_dir(dir, options)) != NULL)
+				print_header(i, step, dir, options);
+			if ((!(i == 0 && !dirs->next) || options & OPT_UPPER_R) && files)
 				ft_printf("%s:\n", dir->name);
-			files = read_dir(dir, options);
 			sort_list(&files, options);
-			print_files(files, options);
+			print_files(files, options, S_IFDIR);
 			if (options & OPT_UPPER_R)
 				print_dirs(files, options, step + 1);
 			ft_lstdel(&files, ft_lst_free_file);

@@ -6,7 +6,7 @@
 #    By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/01 20:52:09 by gloras-t          #+#    #+#              #
-#    Updated: 2020/12/20 01:43:22 by slindgre         ###   ########.fr        #
+#    Updated: 2020/12/21 01:53:52 by slindgre         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,7 +67,7 @@ $(LIBFTP):
 
 clean:
 	@make -sC $(FT_PRINTF) clean
-	@rm -rf $(OBJ_SRC_DIR) $(OBJ_TEST_SRC_DIR)
+	@rm -rf $(OBJ_SRC_DIR) $(OBJ_TEST_SRC_DIR) o1 o2
 	
 fclean: clean
 	@make -sC $(FT_PRINTF) fclean

@@ -8,7 +8,7 @@ ex_2="ls"
 
 ${ex_1} $@ > o1
 ${ex_2} $@ > o2
-DIFF=$(diff -w <(cat o1) <(cat o2))
+DIFF=$(diff -w -b -E <(cat o1) <(cat o2))
 if [ "$DIFF" != "" ]
 then
     printf "${RED}KO${EOC}: "
