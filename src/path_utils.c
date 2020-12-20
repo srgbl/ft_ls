@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 20:26:02 by slindgre          #+#    #+#             */
-/*   Updated: 2020/12/20 01:11:32 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/20 03:47:01 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ void	map_to_file(t_stat buf, char *path, char *prefix, t_file *file)
 	file->visibility = (path[0] != '.') ? TRUE : FALSE;
 	file->invalid = FALSE;
 	file->target_path = NULL;
+	file->blksize = buf.st_blksize;
+	file->blocks = buf.st_blocks;
 }
 
 int		is_dot_path(char *path)

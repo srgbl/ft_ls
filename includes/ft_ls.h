@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 20:57:11 by gloras-t          #+#    #+#             */
-/*   Updated: 2020/12/19 19:51:12 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/20 02:34:34 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,18 @@ int		parse_options(char *arg, uint8_t *options);
 void	parse_args(int argc, char *argv[], t_list **paths, uint8_t *options);
 
 /*
-** utils.c
+** comparsion_1.c
 */
 int		compare_by_name_asc(t_list *a, t_list *b);
 int		compare_by_time_asc(t_list *a, t_list *b);
 int		compare_by_name_desc(t_list *a, t_list *b);
 int		compare_by_time_desc(t_list *a, t_list *b);
+
+/*
+** comparsion_2.c
+*/
+int		compare_by_size_asc(t_list *a, t_list *b);
+int		compare_by_size_desc(t_list *a, t_list *b);
 
 /*
 ** path_utils.c

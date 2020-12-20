@@ -6,7 +6,7 @@
 #    By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/01 20:52:09 by gloras-t          #+#    #+#              #
-#    Updated: 2020/12/19 17:29:40 by slindgre         ###   ########.fr        #
+#    Updated: 2020/12/20 01:43:22 by slindgre         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,8 @@ OBJ_SRC_DIR = obj_src
 OBJ_TEST_SRC_DIR = obj_test_src
 
 OBJ_SRC = $(addprefix $(OBJ_SRC_DIR)/, \
-			utils.o \
+			comparsion_1.o \
+			comparsion_2.o \
 			parse_args.o \
 			path_utils.o \
 			sort_list.o \

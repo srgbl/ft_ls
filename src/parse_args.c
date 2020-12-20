@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 11:35:28 by gloras-t          #+#    #+#             */
-/*   Updated: 2020/12/19 19:49:23 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/20 03:10:39 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@ int		parse_options(char *arg, uint8_t *options)
 		if (ind == -1)
 			return (i + 1);
 		*options |= 1 << ind;
+		if (*arg == 't')
+			*options &= ~OPT_UPPER_S;
+		if (*arg == 'S')
+			*options &= ~OPT_LOWER_T;
 		arg++;
 		i++;
 	}

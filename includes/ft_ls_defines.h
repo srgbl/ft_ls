@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 20:57:11 by gloras-t          #+#    #+#             */
-/*   Updated: 2020/12/20 01:32:24 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/20 03:47:04 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,17 @@
 # define OPT_LOWER_R    4
 # define OPT_LOWER_T    8
 # define OPT_UPPER_R    16
+# define OPT_LOWER_S    32
+# define OPT_UPPER_S    64
 # define OPT_NEW_LINE	128
-# define OPTIONS        "alrtR"
+# define OPTIONS        "alrtRsS"
 # define FALSE			0
 # define TRUE			1
 # define FILES_PER_ROW	1
 # define MODES_LEN		9
 # define MODES			"rwxrwxrwx"
 # define PATH_LEN		1024
+# define BLOCK_SIZE		1024
 
 typedef struct dirent	t_dirent;
 typedef struct stat		t_stat;
@@ -57,6 +60,8 @@ typedef struct			s_file
 	char				*prefix;
 	int					invalid;
 	char				*target_path;
+	int					blksize;
+	int					blocks;
 }						t_file;
 
 #endif

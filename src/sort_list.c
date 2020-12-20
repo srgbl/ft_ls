@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 20:26:02 by slindgre          #+#    #+#             */
-/*   Updated: 2020/12/19 19:52:19 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/20 02:56:27 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,12 @@ void	sort_list(t_list **list, uint8_t options)
 		comparator = compare_by_time_asc;
 		if (options & OPT_LOWER_R)
 			comparator = compare_by_time_desc;
+	}
+	if (options & OPT_UPPER_S)
+	{
+		comparator = compare_by_size_asc;
+		if (options & OPT_LOWER_R)
+			comparator = compare_by_size_desc;
 	}
 	sort_list_by(list, comparator);
 }
