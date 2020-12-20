@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/04 02:23:45 by slindgre          #+#    #+#             */
-/*   Updated: 2020/12/20 23:48:04 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/21 01:58:18 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ t_list	*get_files(char *path, DIR *dir_stream, uint8_t options)
 	if (path[ft_strlen(path) - 1] != '/')
 		prefix = ft_strjoin(path, "/");
 	else
-		prefix = ft_strdup(path);	
+		prefix = ft_strdup(path);
 	while ((dirent = readdir(dir_stream)) != NULL)
 	{
 		file = get_file(prefix, dirent->d_name, options);

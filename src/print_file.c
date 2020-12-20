@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/26 15:19:04 by slindgre          #+#    #+#             */
-/*   Updated: 2020/12/21 01:45:23 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/21 01:58:45 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,29 +57,6 @@ void	print_file_type(t_file *file)
 	else if (file->type == S_IFDIR)
 		type_literal = 'd';
 	ft_printf("%c", type_literal);
-}
-
-void	get_file_mtime(t_file *file, char *time_str)
-{
-	char		*mtime;
-	int			time_now;
-
-	time_now = time(NULL);
-	mtime = ctime(&file->mtime_sec);
-	mtime[ft_strlen(mtime) - 1] = '\0';
-	if (ft_strlen(mtime) >= 24)
-	{
-		if (time_now - file->mtime_sec > HALF_YEAR)
-		{
-			mtime[11] = mtime[19];
-			mtime[12] = mtime[20];
-			mtime[13] = mtime[21];
-			mtime[14] = mtime[22];
-			mtime[15] = mtime[23];
-		}
-		mtime[16] = '\0';
-	}
-	ft_strcpy(time_str, mtime + 4);
 }
 
 void	print_valid_file(t_file *file)

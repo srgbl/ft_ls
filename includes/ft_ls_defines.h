@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 20:57:11 by gloras-t          #+#    #+#             */
-/*   Updated: 2020/12/21 01:07:51 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/21 02:01:32 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@
 # define MODES			"rwxrwxrwx"
 # define PATH_LEN		1024
 # define BLOCK_SIZE		1024
-# define HALF_YEAR		6 * 30 * 24 * 60 * 60
+# define HALF_YEAR		15552000
 
 typedef struct dirent	t_dirent;
 typedef struct stat		t_stat;
