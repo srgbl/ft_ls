@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 20:57:11 by gloras-t          #+#    #+#             */
-/*   Updated: 2020/12/21 02:00:16 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/25 22:32:59 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int		print_files(t_list *files, uint8_t options, int mode);
 /*
 ** print_dir.c
 */
-t_list	*read_dir(t_file *dir, uint8_t options);
+t_list	*read_dir(t_file *dir);
 void	print_dirs(t_list *dirs, uint8_t options, int step);
 
 /*
