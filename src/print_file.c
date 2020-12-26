@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/26 15:19:04 by slindgre          #+#    #+#             */
-/*   Updated: 2020/12/26 14:31:02 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/26 17:25:21 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,48 +61,52 @@ void	print_file_type(t_file *file)
 	ft_printf("%c", type_literal);
 }
 
-void	print_valid_file(t_file *file)
+void	print_valid_file(t_file *file, uint16_t opt)
 {
-	t_passwd	*user;
+	t_passwd	*owner;
 	t_group		*group;
-	char		*user_name;
+	char		*owner_name;
 	char		*group_name;
 	char		time[13];
 
-	user_name = "?";
+	owner_name = "?";
 	group_name = "?";
-	if ((user = getpwuid(file->uid)) != NULL)
-		user_name = user->pw_name;
+	if ((owner = getpwuid(file->uid)) != NULL)
+		owner_name = owner->pw_name;
 	if ((group = getgrgid(file->gid)) != NULL)
 		group_name = group->gr_name;
-	get_file_mtime(file, time);
+	convert_file_mtime(file, time);
 	print_file_type(file);
 	print_file_mode(file);
-	ft_printf(" %#5d %8s\t%8s\t%#12ld %#12s ",
-	file->n_links, user_name,
-	group_name, file->size, time);
+	ft_printf(" %#5lu ", file->n_links);
+	if (!(opt & OPT_LOWER_G))
+		ft_printf("%8s\t", owner_name);
+	ft_printf("%8s\t%#12ld %#12s ", group_name, file->size, time);
 }
 
-void	print_file_info(t_file *file, uint16_t opt)
+void	print_file_info(t_file *file, uint16_t opt, int last)
 {
+	if (opt & OPT_LOWER_I)
+		print_file_inode(file);
 	if (opt & OPT_LOWER_S)
-	{
-		if (file->invalid)
-			ft_printf("%#4s ", "?");
-		else
-			ft_printf("%#4d ", file->blocks / 2);
-	}
+		print_file_blocks(file);
 	if (opt & OPT_LOWER_L)
 	{
 		if (file->invalid)
-			ft_printf("-????????? %#5s %8s\t%8s\t%#12s %#12s ",
-		"?", "?", "?", "?", "?");
+		{
+			ft_printf("-????????? %#5s ", "?");
+			if (!(opt & OPT_LOWER_G))
+				ft_printf("%8s\t", "?");
+			ft_printf("%8s\t%#12s %#12s ", "?", "?", "?");
+		}
 		else
-			print_valid_file(file);
+			print_valid_file(file, opt);
 	}
 	ft_printf(opt & OPT_UPPER_Q ? "\"%s\"" : "%s", file->name);
 	if (opt & OPT_LOWER_L && !(file->invalid) && file->type == S_IFLNK)
 		ft_printf(opt & OPT_UPPER_Q ? LINKQ : LINK, file->target_path);
+	if (opt & OPT_LOWER_M && last == FALSE)
+		ft_printf(",");
 	ft_printf("\n");
 }
 
@@ -110,7 +114,7 @@ int		print_files(t_list *list, uint16_t options, int mode)
 {
 	t_file	*file;
 	t_list	*head;
-	int		total_blocks;
+	long	total_blocks;
 
 	head = list;
 	total_blocks = 0;
@@ -123,13 +127,13 @@ int		print_files(t_list *list, uint16_t options, int mode)
 	}
 	if ((options & OPT_LOWER_L || options & OPT_LOWER_S)
 		&& mode == S_IFDIR)
-		ft_printf("total %d\n", total_blocks);
+		ft_printf("total %ld\n", total_blocks);
 	list = head;
 	while (list)
 	{
 		file = (t_file*)list->content;
 		if (file->visibility == TRUE || options & OPT_LOWER_A)
-			print_file_info(file, options);
+			print_file_info(file, options, list->next == NULL);
 		list = list->next;
 	}
 	return (options & OPT_NEW_LINE);

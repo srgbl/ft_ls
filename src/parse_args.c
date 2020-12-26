@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/02 11:35:28 by gloras-t          #+#    #+#             */
-/*   Updated: 2020/12/26 14:30:44 by slindgre         ###   ########.fr       */
+/*   Created: 2020/07/02 11:35:28 by slindgre          #+#    #+#             */
+/*   Updated: 2020/12/26 17:00:25 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@ int		parse_options(char *arg, uint16_t *options)
 			*options &= ~OPT_UPPER_S;
 		if (*arg == 'S')
 			*options &= ~OPT_LOWER_T;
+		if (*arg == 'm')
+			*options &= ~OPT_LOWER_L;
+		if (*arg == 'l' || *arg == '1')
+			*options &= ~OPT_LOWER_M;
 		arg++;
 		i++;
 	}
