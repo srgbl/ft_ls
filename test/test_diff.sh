@@ -6,9 +6,9 @@ EOC='\033[0m'
 ex_1="./ft_ls"
 ex_2="ls"
 
-${ex_1} $@ | cat -e > o1
-${ex_2} $@ | cat -e > o2
-DIFF=$(diff --brief -w -b -E <(cat o1) <(cat o2))
+${ex_1} $@ -1 | cat -e > o1
+${ex_2} $@ -1 | cat -e > o2
+DIFF=$(diff <(cat o1) <(cat o2))
 if [ "$DIFF" != "" ]
 then
     printf "${RED}KO${EOC}: "

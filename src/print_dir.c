@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/04 02:23:45 by slindgre          #+#    #+#             */
-/*   Updated: 2020/12/26 14:16:24 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/26 23:55:46 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,12 +84,11 @@ t_list	*read_dir(t_file *dir)
 	return (files);
 }
 
-void	print_header(int i, int step, t_file *dir, uint16_t opt)
+void	print_header(int i, t_file *dir)
 {
-	if (i != 0 || opt & OPT_NEW_LINE)
+	if (i != 0)
 		ft_printf("\n");
-	if (step > 0)
-		ft_printf(opt & OPT_UPPER_Q ? "\"%s" : "%s", dir->prefix);
+	ft_printf("%s%s:\n", dir->prefix, dir->name);
 }
 
 void	print_dirs(t_list *dirs, uint16_t opt, int step)
@@ -106,10 +105,10 @@ void	print_dirs(t_list *dirs, uint16_t opt, int step)
 		if (dir->type == S_IFDIR && ((!is_dot_path(dir->name) &&
 		(dir->visibility == TRUE || opt & OPT_LOWER_A)) || step == 0))
 		{
-			if ((files = read_dir(dir)) != NULL)
-				print_header(i, step, dir, opt);
-			if ((!(i == 0 && !dirs->next) || opt & OPT_UPPER_R) && files)
-				ft_printf(opt & OPT_UPPER_Q ? "%s\":\n" : "%s:\n", dir->name);
+			if ((files = read_dir(dir)) != NULL &&
+				(!(i == 0 && !dirs->next && !(opt & OPT_NEW_LINE))
+				|| opt & OPT_UPPER_R))
+				print_header(i, dir);
 			sort_list(&files, opt);
 			print_files(files, opt, S_IFDIR);
 			if (opt & OPT_UPPER_R)

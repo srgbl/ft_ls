@@ -6,13 +6,31 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 11:35:28 by slindgre          #+#    #+#             */
-/*   Updated: 2020/12/26 17:00:25 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/27 00:38:13 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-int		parse_options(char *arg, uint16_t *options)
+static void	combine_options(char *arg, uint16_t *options)
+{
+	if (*arg == 't')
+		*options &= ~OPT_UPPER_S;
+	if (*arg == 'S')
+		*options &= ~OPT_LOWER_T;
+	if (*arg == 'm')
+		*options &= ~OPT_LOWER_L;
+	if (*arg == 'l')
+		*options &= ~OPT_ONE;
+	if (*arg == 'l' || *arg == '1' || *arg == 'g')
+		*options &= ~OPT_LOWER_M;
+	if (*arg == 'm')
+		*options &= ~OPT_LOWER_L;
+	if (*arg == 'g')
+		*options |= OPT_LOWER_L;
+}
+
+int			parse_options(char *arg, uint16_t *options)
 {
 	int	ind;
 	int	i;
@@ -26,21 +44,14 @@ int		parse_options(char *arg, uint16_t *options)
 		if (ind == -1)
 			return (i + 1);
 		*options |= 1 << ind;
-		if (*arg == 't')
-			*options &= ~OPT_UPPER_S;
-		if (*arg == 'S')
-			*options &= ~OPT_LOWER_T;
-		if (*arg == 'm')
-			*options &= ~OPT_LOWER_L;
-		if (*arg == 'l' || *arg == '1')
-			*options &= ~OPT_LOWER_M;
+		combine_options(arg, options);
 		arg++;
 		i++;
 	}
 	return (-1);
 }
 
-void	parse_args(int argc, char *argv[], t_list **paths, uint16_t *options)
+void		parse_args(int argc, char *argv[], t_list **paths, uint16_t *opt)
 {
 	int	i;
 	int	res;
@@ -50,7 +61,7 @@ void	parse_args(int argc, char *argv[], t_list **paths, uint16_t *options)
 	{
 		if (ft_strlen(argv[i]) > 1 && argv[i][0] == '-')
 		{
-			if ((res = parse_options(argv[i] + 1, options)) != -1)
+			if ((res = parse_options(argv[i] + 1, opt)) != -1)
 			{
 				if (res == -2)
 					ft_printf("ft_ls: unrecognized option '%s'\n", argv[i]);

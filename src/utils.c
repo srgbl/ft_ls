@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/21 01:59:24 by slindgre          #+#    #+#             */
-/*   Updated: 2020/12/26 17:25:27 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/27 00:40:21 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,40 @@ void	convert_file_mtime(t_file *file, char *time_str)
 	ft_strcpy(time_str, mtime + 4);
 }
 
-void	print_file_blocks(t_file *file)
+void	print_file_blocks(t_file *file, t_columns *c)
 {
 	if (file->invalid)
-		ft_printf("%#4s ", "?");
+		ft_printf("%*s ", c->w_blocks, "?");
 	else
-		ft_printf("%#4ld ", file->blocks / 2);
+		ft_printf("%*ld ", c->w_blocks, file->blocks / 2);
 }
 
-void	print_file_inode(t_file *file)
+void	print_file_inode(t_file *file, t_columns *c)
 {
 	if (file->invalid)
-		ft_printf("%#18s ", "?");
+		ft_printf("%*s ", c->w_inode, "?");
 	else
-		ft_printf("%#18lu ", file->inode);
+		ft_printf("%*lu ", c->w_inode, file->inode);
+}
+
+void	get_fields_width(t_columns *c, uint16_t opt)
+{
+	if (c->w_owner == 0)
+		c->w_owner = 1;
+	if (c->w_group == 0)
+		c->w_group = 1;
+	if (c->w_name == 0)
+		c->w_name = 1;
+	c->blocks /= 2;
+	c->w_inode = 0;
+	c->w_blocks = 0;
+	c->w_links = 0;
+	c->w_size = 0;
+	if (opt & OPT_LOWER_L || OPT_ONE)
+	{
+		c->w_inode = ft_nbrlen(c->inode);
+		c->w_blocks = ft_nbrlen(c->blocks);
+		c->w_links = ft_nbrlen(c->n_links);
+		c->w_size = ft_nbrlen(c->size);
+	}
 }

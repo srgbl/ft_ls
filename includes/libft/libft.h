@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/23 22:16:00 by slindgre          #+#    #+#             */
-/*   Updated: 2020/12/26 16:47:57 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/26 19:22:38 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ char					*ft_fill_line(int length, char c);
 size_t					ft_lstsize(t_list *lst);
 void					ft_lstadd_end(t_list **alst, t_list *new);
 void					ft_lstadd_back(t_list **list, void const *content,
-					size_t content_size);
+						size_t content_size);
 void					ft_lstprint(t_list *lst);
 int						ft_lstcmp(t_list *list, int (f)(t_list*, size_t),
 						size_t n);
@@ -138,5 +138,6 @@ long					ft_atoi_long_strict(char **line, int *err);
 
 int						ft_isspace(int c);
 LL						ft_abs(LL n);
+int						ft_nbrlen(long nb);
 
 #endif

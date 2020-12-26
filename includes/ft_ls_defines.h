@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 20:57:11 by slindgre          #+#    #+#             */
-/*   Updated: 2020/12/26 17:13:47 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/27 01:11:05 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,10 @@
 # define OPT_LOWER_G    (uint16_t)(1 << 10)
 # define OPT_LOWER_I	(uint16_t)(1 << 11)
 # define OPT_ONE		(uint16_t)(1 << 12)
+# define OPT_UPPER_G	(uint16_t)(1 << 13)
 
 # define OPT_NEW_LINE	(uint16_t)(1 << 15)
-# define OPTIONS        "alrtRsShQmgi1"
+# define OPTIONS        "alrtRsShQmgi1G"
 # define FALSE			0
 # define TRUE			1
 # define FILES_PER_ROW	1
@@ -47,11 +48,11 @@
 # define PATH_LEN		1024
 # define BLOCK_SIZE		1024
 # define HALF_YEAR		15552000
-# define KB 1 << 1
-# define MB 1 << 2
-# define GB 1 << 3
-# define TB 1 << 4
-# define PB 1 << 5
+# define KB				1 << 1
+# define MB				1 << 2
+# define GB				1 << 3
+# define TB				1 << 4
+# define PB				1 << 5
 
 typedef struct dirent	t_dirent;
 typedef struct stat		t_stat;
@@ -73,9 +74,29 @@ typedef struct			s_file
 	long				size;
 	char				*prefix;
 	int					invalid;
-	char				*target_path;
 	int					blksize;
 	long				blocks;
+
+	char				*owner_name;
+	char				*group_name;
+	char				*target_path;
 }						t_file;
+
+typedef struct			s_columns
+{
+	unsigned long		inode;
+	unsigned long		n_links;
+	long				size;
+	long				blocks;
+	long				total_blocks;
+
+	uint8_t				w_inode;
+	uint8_t				w_blocks;
+	uint8_t				w_links;
+	uint8_t				w_owner;
+	uint8_t				w_group;
+	uint8_t				w_size;
+	uint8_t				w_name;
+}						t_columns;
 
 #endif

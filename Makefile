@@ -6,7 +6,7 @@
 #    By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/01 20:52:09 by gloras-t          #+#    #+#              #
-#    Updated: 2020/12/26 16:52:34 by slindgre         ###   ########.fr        #
+#    Updated: 2020/12/27 01:10:01 by slindgre         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,8 @@ OBJ_SRC = $(addprefix $(OBJ_SRC_DIR)/, \
 			print_dir.o \
 			utils.o \
 			print_file.o \
-			print_file_2.o)
+			print_file_2.o \
+			print_file_prepare.o )
 
 FLAGS = -Wall -Werror -Wextra
 
