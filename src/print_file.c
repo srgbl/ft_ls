@@ -78,9 +78,9 @@ void	print_valid_file(t_file *file)
 	get_file_mtime(file, time);
 	print_file_type(file);
 	print_file_mode(file);
-	ft_printf(" %#5d %8s\t%8s\t%#12ld %#12s ",
-	file->n_links, user_name,
-	group_name, file->size, time);
+	ft_printf(" %#5d %8s\t%8s\t", file->n_links, user_name, group_name);
+	print_file_size(file);
+	ft_printf(" %#12s ", time);
 }
 
 void	print_file_info(t_file *file, uint16_t opt)

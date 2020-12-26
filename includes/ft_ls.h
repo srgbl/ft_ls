@@ -59,6 +59,11 @@ void	print_file_info(t_file *file, uint16_t options);
 int		print_files(t_list *files, uint16_t	options, int mode);
 
 /*
+** print_file_2.c
+*/
+void	print_file_size(t_file *file);
+
+/*
 ** print_dir.c
 */
 t_list	*read_dir(t_file *dir);
