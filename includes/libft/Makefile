@@ -6,7 +6,7 @@
 #    By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/23 22:16:23 by slindgre          #+#    #+#              #
-#    Updated: 2020/12/26 16:48:02 by slindgre         ###   ########.fr        #
+#    Updated: 2020/12/26 20:07:50 by slindgre         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ EOC = \033[0m
 all: $(NAME)
 
 $(NAME): $(FILES)
-	@gcc -c $(FLAGS) $(FILES) -g
+	@gcc -c $(FLAGS) $(FILES)
 	@ar rc $(NAME) $(OBJ)
 	@echo "$(GREEN)complete:$(EOC) $(ITALIC)LIBFT$(EOC)"
 

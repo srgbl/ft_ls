@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 20:57:11 by slindgre          #+#    #+#             */
-/*   Updated: 2020/12/26 17:07:50 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/26 23:32:00 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,16 @@ int		is_dot_path(char *path);
 void	sort_list(t_list **list, uint16_t options);
 
 /*
+** print_file_prepare.c
+*/
+void	prepare_to_print_files(t_list *list, uint16_t options, t_columns *c);
+void	print_file_type(t_file *file);
+void	print_file_mode(t_file *file);
+
+/*
 ** print_file.c
 */
-void	print_file_info(t_file *file, uint16_t options, int last);
+void	print_file_info(t_file *file, uint16_t options, t_columns *c, int last);
 int		print_files(t_list *files, uint16_t	options, int mode);
 
 /*
@@ -68,7 +75,8 @@ void	print_dirs(t_list *dirs, uint16_t options, int step);
 ** utils.c
 */
 void	convert_file_mtime(t_file *file, char *time_str);
-void	print_file_inode(t_file *file);
-void	print_file_blocks(t_file *file);
+void	print_file_inode(t_file *file, t_columns *c);
+void	print_file_blocks(t_file *file, t_columns *c);
+void	get_fields_width(t_columns *c, uint16_t opt);
 
 #endif

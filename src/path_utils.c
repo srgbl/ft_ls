@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 20:26:02 by slindgre          #+#    #+#             */
-/*   Updated: 2020/12/26 17:10:44 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/26 23:31:28 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,10 @@ void	ft_lst_free_file(void *elem, size_t content_size)
 		ft_strdel(&(((t_file*)elem)->prefix));
 	if ((((t_file*)elem)->target_path) != NULL)
 		ft_strdel(&(((t_file*)elem)->target_path));
+	if ((((t_file*)elem)->owner_name) != NULL)
+		ft_strdel(&(((t_file*)elem)->owner_name));
+	if ((((t_file*)elem)->group_name) != NULL)
+		ft_strdel(&(((t_file*)elem)->group_name));
 	ft_bzero(elem, content_size);
 	ft_memdel(&elem);
 }
@@ -56,6 +60,8 @@ void	map_to_file(t_stat buf, char *path, char *prefix, t_file *file)
 	file->target_path = NULL;
 	file->blksize = buf.st_blksize;
 	file->blocks = buf.st_blocks;
+	file->owner_name = NULL;
+	file->group_name = NULL;
 }
 
 int		is_dot_path(char *path)
