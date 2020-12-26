@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_file_2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahugh <ahugh@student.42.fr>                +#+  +:+       +#+        */
+/*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 21:19:04 by ahugh             #+#    #+#             */
-/*   Updated: 2020/12/26 21:31:02 by ahugh            ###   ########.fr       */
+/*   Updated: 2020/12/27 02:22:09 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static inline void	print_unit_type_literal(uint unit_type)
 		ft_putchar('P');
 }
 
-void				print_file_size(t_file *file, uint16_t opt)
+void				print_file_size(t_file *file, uint16_t opt, t_columns *c)
 {
 	uint			unit_type;
 	float			file_size;
@@ -34,15 +34,36 @@ void				print_file_size(t_file *file, uint16_t opt)
 	file_size = (float)(file->size);
 	if (file->size < BLOCK_SIZE || !(opt & OPT_LOWER_H))
 	{
-		ft_printf("%6zu", file->size);
+		ft_printf("%*zu", c->w_size, file->size);
 		return ;
 	}
 	unit_type = 1;
-	while (file_size > BLOCK_SIZE && !(unit_type & PB))
+	while (file_size >= BLOCK_SIZE && !(unit_type & PB))
 	{
 		file_size /= BLOCK_SIZE;
 		unit_type <<= 1;
 	}
-	ft_printf("%5.1f", file_size);
+	ft_printf("%*.1f", c->w_size - 1, file_size);
 	print_unit_type_literal(unit_type);
+}
+
+int					get_file_size_width(t_file *file, uint16_t opt)
+{
+	uint			unit_type;
+	float			file_size;
+	int				width;
+
+	file_size = (float)(file->size);
+	if (file->size < BLOCK_SIZE || !(opt & OPT_LOWER_H))
+		return (ft_nbrlen(file->size));
+	unit_type = 1;
+	while (file_size >= BLOCK_SIZE && !(unit_type & PB))
+	{
+		file_size /= BLOCK_SIZE;
+		unit_type <<= 1;
+	}
+	width = 4;
+	while ((file_size /= 10) >= 1)
+		width++;
+	return (width);
 }

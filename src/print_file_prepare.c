@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/26 15:19:04 by slindgre          #+#    #+#             */
-/*   Updated: 2020/12/27 00:40:15 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/27 02:23:22 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,11 @@ void	print_file_type(t_file *file)
 	ft_printf("%c", type_literal);
 }
 
-void	prepare_to_print_file(t_file *f, t_columns *c)
+void	prepare_to_print_file(t_file *f, uint16_t options, t_columns *c)
 {
 	t_passwd	*owner;
 	t_group		*group;
+	int			size_width;
 
 	if (f->blocks == 1)
 		f->blocks = 2;
@@ -74,7 +75,8 @@ void	prepare_to_print_file(t_file *f, t_columns *c)
 	c->inode = (f->inode > c->inode) ? f->inode : c->inode;
 	c->blocks = (f->blocks > c->blocks) ? f->blocks : c->blocks;
 	c->n_links = (f->n_links > c->n_links) ? f->n_links : c->n_links;
-	c->size = (f->size > c->size) ? f->size : c->size;
+	size_width = get_file_size_width(f, options);
+	c->w_size = (size_width > c->w_size) ? size_width : c->w_size;
 	if (ft_strlen(f->owner_name) > c->w_owner)
 		c->w_owner = ft_strlen(f->owner_name);
 	if (ft_strlen(f->group_name) > c->w_group)
@@ -91,7 +93,7 @@ void	prepare_to_print_files(t_list *list, uint16_t options, t_columns *c)
 	{
 		f = (t_file*)list->content;
 		if ((f->visibility || options & OPT_LOWER_A) && !f->invalid)
-			prepare_to_print_file(f, c);
+			prepare_to_print_file(f, options, c);
 		list = list->next;
 	}
 }
