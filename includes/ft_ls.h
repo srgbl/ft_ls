@@ -61,7 +61,7 @@ int		print_files(t_list *files, uint16_t	options, int mode);
 /*
 ** print_file_2.c
 */
-void	print_file_size(t_file *file);
+void	print_file_size(t_file *file, uint16_t options);
 
 /*
 ** print_dir.c

@@ -61,7 +61,7 @@ void	print_file_type(t_file *file)
 	ft_printf("%c", type_literal);
 }
 
-void	print_valid_file(t_file *file)
+void	print_valid_file(t_file *file, uint16_t opt)
 {
 	t_passwd	*user;
 	t_group		*group;
@@ -79,7 +79,7 @@ void	print_valid_file(t_file *file)
 	print_file_type(file);
 	print_file_mode(file);
 	ft_printf(" %#5d %8s\t%8s\t", file->n_links, user_name, group_name);
-	print_file_size(file);
+	print_file_size(file, opt);
 	ft_printf(" %#12s ", time);
 }
 
@@ -98,7 +98,7 @@ void	print_file_info(t_file *file, uint16_t opt)
 			ft_printf("-????????? %#5s %8s\t%8s\t%#12s %#12s ",
 		"?", "?", "?", "?", "?");
 		else
-			print_valid_file(file);
+			print_valid_file(file, opt);
 	}
 	ft_printf(opt & OPT_UPPER_Q ? "\"%s\"" : "%s", file->name);
 	if (opt & OPT_LOWER_L && !(file->invalid) && file->type == S_IFLNK)

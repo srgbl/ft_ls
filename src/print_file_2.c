@@ -26,15 +26,15 @@ static inline void	print_unit_type_literal(uint unit_type)
 		ft_putchar('P');
 }
 
-void				print_file_size(t_file *file)
+void				print_file_size(t_file *file, uint16_t opt)
 {
 	uint			unit_type;
 	float			file_size;
 
 	file_size = (float)(file->size);
-	if (file_size < BLOCK_SIZE)
+	if (file->size < BLOCK_SIZE || !(opt & OPT_LOWER_H))
 	{
-		ft_printf("%zu", file_size);
+		ft_printf("%6zu", file->size);
 		return ;
 	}
 	unit_type = 1;
@@ -43,6 +43,6 @@ void				print_file_size(t_file *file)
 		file_size /= BLOCK_SIZE;
 		unit_type <<= 1;
 	}
-	ft_printf("%.1f", file_size);
+	ft_printf("%5.1f", file_size);
 	print_unit_type_literal(unit_type);
 }
