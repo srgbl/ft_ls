@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 20:57:11 by slindgre          #+#    #+#             */
-/*   Updated: 2020/12/27 00:40:52 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/27 01:11:05 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,11 @@
 # define PATH_LEN		1024
 # define BLOCK_SIZE		1024
 # define HALF_YEAR		15552000
+# define KB				1 << 1
+# define MB				1 << 2
+# define GB				1 << 3
+# define TB				1 << 4
+# define PB				1 << 5
 
 typedef struct dirent	t_dirent;
 typedef struct stat		t_stat;

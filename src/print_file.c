@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/26 15:19:04 by slindgre          #+#    #+#             */
-/*   Updated: 2020/12/27 00:38:52 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/27 01:09:18 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void	print_valid_file(t_file *file, uint16_t opt, t_columns *c)
 		ft_printf("%-*s ", c->w_owner, file->owner_name);
 	if (!(opt & OPT_UPPER_G))
 		ft_printf("%-*s ", c->w_group, file->group_name);
-	ft_printf("%*ld %#12s ", c->w_size, file->size, time);
+	print_file_size(file, opt);
+	ft_printf(" %#12s ", time);
 }
 
 void	print_invalid_file(uint16_t opt, t_columns *c)
