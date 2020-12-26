@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/26 15:19:04 by slindgre          #+#    #+#             */
-/*   Updated: 2020/12/27 01:09:18 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/27 01:49:07 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	print_valid_file(t_file *file, uint16_t opt, t_columns *c)
 		ft_printf("%-*s ", c->w_owner, file->owner_name);
 	if (!(opt & OPT_UPPER_G))
 		ft_printf("%-*s ", c->w_group, file->group_name);
-	print_file_size(file, opt);
+	print_file_size(file, opt, c);
 	ft_printf(" %#12s ", time);
 }
 
@@ -70,11 +70,11 @@ int		print_files(t_list *list, uint16_t opt, int context)
 	columns.total_blocks = 0;
 	columns.inode = 0;
 	columns.blocks = 0;
-	columns.size = 0;
 	columns.n_links = 0;
 	columns.w_owner = 0;
 	columns.w_group = 0;
 	columns.w_name = 0;
+	columns.w_size = 0;
 	prepare_to_print_files(list, opt, &columns);
 	get_fields_width(&columns, opt);
 	if (context == S_IFDIR && (opt & OPT_LOWER_L || opt & OPT_LOWER_S))
