@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/26 15:19:04 by slindgre          #+#    #+#             */
-/*   Updated: 2020/12/21 01:58:45 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/26 14:31:02 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	print_valid_file(t_file *file)
 	group_name, file->size, time);
 }
 
-void	print_file_info(t_file *file, uint8_t options)
+void	print_file_info(t_file *file, uint16_t options)
 {
 	if (options & OPT_LOWER_S)
 	{
@@ -104,7 +104,7 @@ void	print_file_info(t_file *file, uint8_t options)
 	ft_printf("\n");
 }
 
-int		print_files(t_list *list, uint8_t options, int mode)
+int		print_files(t_list *list, uint16_t options, int mode)
 {
 	t_file	*file;
 	t_list	*head;

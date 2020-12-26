@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 20:26:02 by slindgre          #+#    #+#             */
-/*   Updated: 2020/12/20 23:29:22 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/26 14:15:07 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int		is_dot_path(char *path)
 }
 
 int		verify_paths(t_list *path, t_list **dirs, t_list **files,
-uint8_t options)
+uint16_t options)
 {
 	t_stat	buf;
 	t_file	file;

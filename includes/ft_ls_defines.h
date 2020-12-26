@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 20:57:11 by gloras-t          #+#    #+#             */
-/*   Updated: 2020/12/21 02:01:32 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/26 14:29:39 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,21 @@
 # include <errno.h>
 # include "libft.h"
 
-# define USER           "USER"
 # define OPT_LOWER_A    1
-# define OPT_LOWER_L    2
-# define OPT_LOWER_R    4
-# define OPT_LOWER_T    8
-# define OPT_UPPER_R    16
-# define OPT_LOWER_S    32
-# define OPT_UPPER_S    64
-# define OPT_NEW_LINE	128
-# define OPTIONS        "alrtRsS"
+# define OPT_LOWER_L    1 << 1
+# define OPT_LOWER_R    1 << 2
+# define OPT_LOWER_T	(uint16_t)(1 << 3)
+# define OPT_UPPER_R    1 << 4
+# define OPT_LOWER_S    1 << 5
+# define OPT_UPPER_S    (uint16_t)(1 << 6)
+# define OPT_LOWER_H    1 << 7
+# define OPT_UPPER_Q    1 << 8
+# define OPT_LOWER_M    1 << 9
+# define OPT_LOWER_G    1 << 10
+# define OPT_LOWER_I    1 << 11
+
+# define OPT_NEW_LINE	1 << 15
+# define OPTIONS        "alrtRsShQmgi"
 # define FALSE			0
 # define TRUE			1
 # define FILES_PER_ROW	1

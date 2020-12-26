@@ -12,7 +12,7 @@ void print_paths(t_list	*paths)
 
 int main()
 {
-    uint8_t	options;
+    uint16_t	options;
 	t_list	*paths;
 
     options = 0;

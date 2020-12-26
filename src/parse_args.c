@@ -6,17 +6,13 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 11:35:28 by gloras-t          #+#    #+#             */
-/*   Updated: 2020/12/20 03:10:39 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/26 14:30:44 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-/*
-**	если первый символ "-" то отдаем этой функции
-*/
-
-int		parse_options(char *arg, uint8_t *options)
+int		parse_options(char *arg, uint16_t *options)
 {
 	int	ind;
 	int	i;
@@ -40,7 +36,7 @@ int		parse_options(char *arg, uint8_t *options)
 	return (-1);
 }
 
-void	parse_args(int argc, char *argv[], t_list **paths, uint8_t *options)
+void	parse_args(int argc, char *argv[], t_list **paths, uint16_t *options)
 {
 	int	i;
 	int	res;

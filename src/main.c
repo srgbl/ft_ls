@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 20:56:02 by gloras-t          #+#    #+#             */
-/*   Updated: 2020/12/20 23:47:51 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/26 14:30:25 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 int	main(int argc, char **argv)
 {
-	uint8_t	options;
-	t_list	*paths;
-	t_list	*dirs;
-	t_list	*files;
+	uint16_t	options;
+	t_list		*paths;
+	t_list		*dirs;
+	t_list		*files;
 
 	paths = NULL;
 	dirs = NULL;

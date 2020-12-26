@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/04 02:23:45 by slindgre          #+#    #+#             */
-/*   Updated: 2020/12/25 22:32:47 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/26 14:16:24 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ t_list	*read_dir(t_file *dir)
 	return (files);
 }
 
-void	print_header(int i, int step, t_file *dir, uint8_t options)
+void	print_header(int i, int step, t_file *dir, uint16_t options)
 {
 	if (i != 0 || options & OPT_NEW_LINE)
 		ft_printf("\n");
@@ -92,7 +92,7 @@ void	print_header(int i, int step, t_file *dir, uint8_t options)
 		ft_printf("%s", dir->prefix);
 }
 
-void	print_dirs(t_list *dirs, uint8_t options, int step)
+void	print_dirs(t_list *dirs, uint16_t options, int step)
 {
 	t_list	*files;
 	t_file	*dir;

@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/05 21:53:53 by gloras-t          #+#    #+#             */
-/*   Updated: 2020/12/20 21:37:47 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/26 13:43:08 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int main() 
 {
-	uint8_t	options;
+	uint16_t	options;
 	
 	options = 0;
 	assert(parse_options("a", &options) == 0);

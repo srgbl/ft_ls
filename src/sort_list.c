@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 20:26:02 by slindgre          #+#    #+#             */
-/*   Updated: 2020/12/20 02:56:27 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/26 14:16:48 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	sort_list_by(t_list **list, int (*comparator)(t_list*, t_list*))
 	free(list_arr);
 }
 
-void	sort_list(t_list **list, uint8_t options)
+void	sort_list(t_list **list, uint16_t options)
 {
 	int (*comparator)(t_list*, t_list*);
 
