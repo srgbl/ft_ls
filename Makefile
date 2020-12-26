@@ -32,7 +32,8 @@ OBJ_SRC = $(addprefix $(OBJ_SRC_DIR)/, \
 			sort_list.o \
 			print_dir.o \
 			utils.o \
-			print_file.o)
+			print_file.o \
+			print_file_2.o)
 
 FLAGS = -Wall -Werror -Wextra
 

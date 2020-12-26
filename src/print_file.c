@@ -81,7 +81,9 @@ void	print_valid_file(t_file *file, uint16_t opt)
 	ft_printf(" %#5lu ", file->n_links);
 	if (!(opt & OPT_LOWER_G))
 		ft_printf("%8s\t", owner_name);
-	ft_printf("%8s\t%#12ld %#12s ", group_name, file->size, time);
+	ft_printf("%8s\t", group_name);
+  print_file_size(file, opt);
+	ft_printf(" %#12s ", time);
 }
 
 void	print_file_info(t_file *file, uint16_t opt, int last)
