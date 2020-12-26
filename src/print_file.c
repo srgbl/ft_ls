@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+#define LINKQ " -> \"%s\""
+#define LINK  " -> %s"
 
 void	print_file_mode(t_file *file)
 {
@@ -81,16 +83,16 @@ void	print_valid_file(t_file *file)
 	group_name, file->size, time);
 }
 
-void	print_file_info(t_file *file, uint16_t options)
+void	print_file_info(t_file *file, uint16_t opt)
 {
-	if (options & OPT_LOWER_S)
+	if (opt & OPT_LOWER_S)
 	{
 		if (file->invalid)
 			ft_printf("%#4s ", "?");
 		else
 			ft_printf("%#4d ", file->blocks / 2);
 	}
-	if (options & OPT_LOWER_L)
+	if (opt & OPT_LOWER_L)
 	{
 		if (file->invalid)
 			ft_printf("-????????? %#5s %8s\t%8s\t%#12s %#12s ",
@@ -98,9 +100,9 @@ void	print_file_info(t_file *file, uint16_t options)
 		else
 			print_valid_file(file);
 	}
-	ft_printf("%s", file->name);
-	if (options & OPT_LOWER_L && !(file->invalid) && file->type == S_IFLNK)
-		ft_printf(" -> %s", file->target_path);
+	ft_printf(opt & OPT_UPPER_Q ? "\"%s\"" : "%s", file->name);
+	if (opt & OPT_LOWER_L && !(file->invalid) && file->type == S_IFLNK)
+		ft_printf(opt & OPT_UPPER_Q ? LINKQ : LINK, file->target_path);
 	ft_printf("\n");
 }
 

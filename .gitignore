@@ -2,6 +2,7 @@
 *.o
 *.dSYM/
 *.swp
+.idea/
 o1
 o2
 .DS_Store
