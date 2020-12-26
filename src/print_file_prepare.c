@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/26 15:19:04 by slindgre          #+#    #+#             */
-/*   Updated: 2020/12/26 23:04:12 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/27 00:40:15 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ void	prepare_to_print_file(t_file *f, t_columns *c)
 	t_passwd	*owner;
 	t_group		*group;
 
+	if (f->blocks == 1)
+		f->blocks = 2;
 	c->total_blocks += f->blocks / 2;
 	if ((owner = getpwuid(f->uid)) != NULL)
 		f->owner_name = ft_strdup(owner->pw_name);
@@ -84,7 +86,7 @@ void	prepare_to_print_file(t_file *f, t_columns *c)
 void	prepare_to_print_files(t_list *list, uint16_t options, t_columns *c)
 {
 	t_file		*f;
-	
+
 	while (list)
 	{
 		f = (t_file*)list->content;

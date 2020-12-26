@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/21 01:59:24 by slindgre          #+#    #+#             */
-/*   Updated: 2020/12/26 23:10:37 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/27 00:40:21 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void	get_fields_width(t_columns *c, uint16_t opt)
 		c->w_group = 1;
 	if (c->w_name == 0)
 		c->w_name = 1;
+	c->blocks /= 2;
 	c->w_inode = 0;
 	c->w_blocks = 0;
 	c->w_links = 0;

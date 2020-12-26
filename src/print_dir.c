@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/04 02:23:45 by slindgre          #+#    #+#             */
-/*   Updated: 2020/12/26 23:39:48 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/26 23:55:46 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,14 +84,14 @@ t_list	*read_dir(t_file *dir)
 	return (files);
 }
 
-void	print_header(int i, t_file *dir, uint16_t options)
+void	print_header(int i, t_file *dir)
 {
-	if (i != 0 || (i == 0 && options & OPT_NEW_LINE))
+	if (i != 0)
 		ft_printf("\n");
-	ft_printf("%s", dir->prefix);
+	ft_printf("%s%s:\n", dir->prefix, dir->name);
 }
 
-void	print_dirs(t_list *dirs, uint16_t options, int step)
+void	print_dirs(t_list *dirs, uint16_t opt, int step)
 {
 	t_list	*files;
 	t_file	*dir;
@@ -103,16 +103,16 @@ void	print_dirs(t_list *dirs, uint16_t options, int step)
 	{
 		dir = (t_file*)dirs->content;
 		if (dir->type == S_IFDIR && ((!is_dot_path(dir->name) &&
-		(dir->visibility == TRUE || options & OPT_LOWER_A)) || step == 0))
+		(dir->visibility == TRUE || opt & OPT_LOWER_A)) || step == 0))
 		{
-			if ((files = read_dir(dir)) != NULL)
-				print_header(i, dir, options);
-			if ((!(i == 0 && !dirs->next) || options & OPT_UPPER_R) && files)
-				ft_printf("%s:\n", dir->name);
-			sort_list(&files, options);
-			print_files(files, options, S_IFDIR);
-			if (options & OPT_UPPER_R)
-				print_dirs(files, options, step + 1);
+			if ((files = read_dir(dir)) != NULL &&
+				(!(i == 0 && !dirs->next && !(opt & OPT_NEW_LINE))
+				|| opt & OPT_UPPER_R))
+				print_header(i, dir);
+			sort_list(&files, opt);
+			print_files(files, opt, S_IFDIR);
+			if (opt & OPT_UPPER_R)
+				print_dirs(files, opt, step + 1);
 			ft_lstdel(&files, ft_lst_free_file);
 		}
 		dirs = dirs->next;

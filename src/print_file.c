@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/26 15:19:04 by slindgre          #+#    #+#             */
-/*   Updated: 2020/12/26 23:31:10 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/27 00:38:52 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	print_file_info(t_file *file, uint16_t opt, t_columns *c, int last)
 			print_valid_file(file, opt, c);
 	}
 	ft_printf(opt & OPT_UPPER_Q ? "\"%s\"" : "%s", file->name);
-	if ((opt & OPT_LOWER_L ) && !(file->invalid)
+	if ((opt & OPT_LOWER_L) && !(file->invalid)
 		&& file->type == S_IFLNK)
 		ft_printf(opt & OPT_UPPER_Q ? LINKQ : LINK, file->target_path);
 	if (opt & OPT_LOWER_M && last == FALSE)
@@ -65,7 +65,7 @@ int		print_files(t_list *list, uint16_t opt, int context)
 {
 	t_file		*file;
 	t_columns	columns;
-	
+
 	columns.total_blocks = 0;
 	columns.inode = 0;
 	columns.blocks = 0;
