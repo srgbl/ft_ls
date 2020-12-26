@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 20:26:02 by slindgre          #+#    #+#             */
-/*   Updated: 2020/12/26 14:15:07 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/26 17:10:44 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	ft_lst_free_file(void *elem, size_t content_size)
 
 void	map_to_file(t_stat buf, char *path, char *prefix, t_file *file)
 {
+	file->inode = buf.st_ino;
 	file->name = ft_strdup(path);
 	file->type = buf.st_mode & S_IFMT;
 	file->mode = buf.st_mode;

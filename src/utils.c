@@ -6,13 +6,13 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/21 01:59:24 by slindgre          #+#    #+#             */
-/*   Updated: 2020/12/21 02:00:33 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/26 17:25:27 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void	get_file_mtime(t_file *file, char *time_str)
+void	convert_file_mtime(t_file *file, char *time_str)
 {
 	char		*mtime;
 	int			time_now;
@@ -33,4 +33,20 @@ void	get_file_mtime(t_file *file, char *time_str)
 		mtime[16] = '\0';
 	}
 	ft_strcpy(time_str, mtime + 4);
+}
+
+void	print_file_blocks(t_file *file)
+{
+	if (file->invalid)
+		ft_printf("%#4s ", "?");
+	else
+		ft_printf("%#4ld ", file->blocks / 2);
+}
+
+void	print_file_inode(t_file *file)
+{
+	if (file->invalid)
+		ft_printf("%#18s ", "?");
+	else
+		ft_printf("%#18lu ", file->inode);
 }
