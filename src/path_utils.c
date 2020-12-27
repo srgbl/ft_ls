@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 20:26:02 by slindgre          #+#    #+#             */
-/*   Updated: 2020/12/26 23:31:28 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/27 10:09:57 by ahugh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,23 +26,6 @@ void		ft_lst_free_file(void *elem, size_t content_size)
 		ft_strdel(&(((t_file*)elem)->group_name));
 	ft_bzero(elem, content_size);
 	ft_memdel(&elem);
-}
-
-char		get_xattr(char *file_name, char *prefix)
-{
-	ssize_t	buff_len;
-	char	*path;
-
-	errno = 0;
-	path = ft_strjoin(prefix, file_name);
-	buff_len = listxattr(path, NULL, 0);
-	free(path);
-	if (buff_len < 1 || errno != 0)
-	{
-		errno = 0;
-		return ('\0');
-	}
-	return ('@');
 }
 
 void		map_to_file(t_stat buf, char *path, char *prefix, t_file *file)

@@ -22,7 +22,7 @@ static inline void	set_extra_mode(t_file *file, char *modes, int mode, \
 	if (mode & S_ISVTX)
 		modes[8] = 't';
 	if (xattr_enabled)
-		modes[MODES_XATTR] = (file->xattr == '\0') ?
+		modes[MODES_XATTR] = (file->xattr == BASE_XATTR) ?
 										MODES[MODES_XATTR] : file->xattr;
 	else
 		modes[MODES_XATTR] = '\0';
@@ -95,7 +95,7 @@ void				prepare_to_print_file(t_file *f, t_columns *c)
 		c->w_group = ft_strlen(f->group_name);
 	if (ft_strlen(f->name) > c->w_name)
 		c->w_name = ft_strlen(f->name);
-	if (f->xattr != '\0')
+	if (f->xattr != BASE_XATTR)
 		c->xattr_enabled = TRUE;
 }
 

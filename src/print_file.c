@@ -30,7 +30,10 @@ void	print_valid_file(t_file *file, uint16_t opt, t_columns *c)
 
 void	print_invalid_file(uint16_t opt, t_columns *c)
 {
-	ft_printf("-????????? %*s ", c->w_links, "?");
+	if (c->xattr_enabled)
+		ft_printf("-?????????  %*s ", c->w_links, "?");
+	else
+		ft_printf("-????????? %*s ", c->w_links, "?");
 	if (!(opt & OPT_LOWER_G))
 		ft_printf("%-*s ", c->w_owner, "?");
 	if (!(opt & OPT_UPPER_G))

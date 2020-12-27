@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 20:57:11 by slindgre          #+#    #+#             */
-/*   Updated: 2020/12/27 05:27:04 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/27 10:25:11 by ahugh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,23 +24,23 @@
 # include <errno.h>
 # include "libft.h"
 
-# define OPT_LOWER_A    (uint16_t)(1)
-# define OPT_LOWER_L    (uint16_t)(1 << 1)
-# define OPT_LOWER_R    (uint16_t)(1 << 2)
+# define OPT_LOWER_A	(uint16_t)(1)
+# define OPT_LOWER_L	(uint16_t)(1 << 1)
+# define OPT_LOWER_R	(uint16_t)(1 << 2)
 # define OPT_LOWER_T	(uint16_t)(1 << 3)
-# define OPT_UPPER_R    (uint16_t)(1 << 4)
-# define OPT_LOWER_S    (uint16_t)(1 << 5)
-# define OPT_UPPER_S    (uint16_t)(1 << 6)
-# define OPT_LOWER_H    (uint16_t)(1 << 7)
-# define OPT_UPPER_Q    (uint16_t)(1 << 8)
-# define OPT_LOWER_M    (uint16_t)(1 << 9)
-# define OPT_LOWER_G    (uint16_t)(1 << 10)
+# define OPT_UPPER_R	(uint16_t)(1 << 4)
+# define OPT_LOWER_S	(uint16_t)(1 << 5)
+# define OPT_UPPER_S	(uint16_t)(1 << 6)
+# define OPT_LOWER_H	(uint16_t)(1 << 7)
+# define OPT_UPPER_Q	(uint16_t)(1 << 8)
+# define OPT_LOWER_M	(uint16_t)(1 << 9)
+# define OPT_LOWER_G	(uint16_t)(1 << 10)
 # define OPT_LOWER_I	(uint16_t)(1 << 11)
 # define OPT_ONE		(uint16_t)(1 << 12)
 # define OPT_UPPER_G	(uint16_t)(1 << 13)
 
 # define OPT_NEW_LINE	(uint16_t)(1 << 15)
-# define OPTIONS        "alrtRsShQmgi1G"
+# define OPTIONS		"alrtRsShQmgi1G"
 # define FALSE			0
 # define TRUE			1
 # define FILES_PER_ROW	1
@@ -57,6 +57,11 @@
 # define PB				1 << 5
 # define LINKQ			" -> \"%s\""
 # define LINK			" -> %s"
+# define ACL_ACCESS		"system.posix_acl_access"
+# define ACL_DEFAULT	"system.posix_acl_default"
+# define BASE_XATTR		'\0'
+# define SYSTEM_XATTR	'+'
+# define CUSTOM_XATTR	'@'
 
 typedef struct dirent	t_dirent;
 typedef struct stat		t_stat;

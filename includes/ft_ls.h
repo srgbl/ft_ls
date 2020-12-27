@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 20:57:11 by slindgre          #+#    #+#             */
-/*   Updated: 2020/12/27 05:17:49 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/27 09:52:58 by ahugh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,11 @@ void	print_blocks(uint64_t count, t_columns *c, \
 */
 t_list	*read_dir(t_file *dir);
 void	print_dirs(t_list *dirs, uint16_t options, int step);
+
+/*
+** xattr.c
+*/
+char	get_xattr(char *file_name, char *prefix);
 
 /*
 ** utils.c
