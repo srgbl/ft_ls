@@ -18,7 +18,7 @@ void	print_valid_file(t_file *file, uint16_t opt, t_columns *c)
 
 	convert_file_mtime(file, time);
 	print_file_type(file);
-	print_file_mode(file);
+	print_file_mode(file, c);
 	ft_printf(" %*lu ", c->w_links, file->n_links);
 	if (!(opt & OPT_LOWER_G))
 		ft_printf("%-*s ", c->w_owner, file->owner_name);
@@ -30,7 +30,10 @@ void	print_valid_file(t_file *file, uint16_t opt, t_columns *c)
 
 void	print_invalid_file(uint16_t opt, t_columns *c)
 {
-	ft_printf("-????????? %*s ", c->w_links, "?");
+	if (c->xattr_enabled)
+		ft_printf("-?????????  %*s ", c->w_links, "?");
+	else
+		ft_printf("-????????? %*s ", c->w_links, "?");
 	if (!(opt & OPT_LOWER_G))
 		ft_printf("%-*s ", c->w_owner, "?");
 	if (!(opt & OPT_UPPER_G))
@@ -60,20 +63,26 @@ void	print_file_info(t_file *file, uint16_t opt, t_columns *c, int last)
 	ft_printf("\n");
 }
 
+void	init_columns(t_columns *columns)
+{
+	columns->total_blocks = 0;
+	columns->inode = 0;
+	columns->w_blocks = 0;
+	columns->n_links = 0;
+	columns->w_owner = 0;
+	columns->w_group = 0;
+	columns->w_name = 0;
+	columns->w_size = 0;
+	columns->w_blocks = 0;
+	columns->xattr_enabled = FALSE;
+}
+
 int		print_files(t_list *list, uint16_t opt, int context)
 {
 	t_file		*file;
 	t_columns	columns;
 
-	columns.total_blocks = 0;
-	columns.inode = 0;
-	columns.w_blocks = 0;
-	columns.n_links = 0;
-	columns.w_owner = 0;
-	columns.w_group = 0;
-	columns.w_name = 0;
-	columns.w_size = 0;
-	columns.w_blocks = 0;
+	init_columns(&columns);
 	columns.options = opt;
 	prepare_to_print_files(list, &columns);
 	get_fields_width(&columns);

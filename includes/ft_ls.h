@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 20:57:11 by slindgre          #+#    #+#             */
-/*   Updated: 2020/12/27 05:17:49 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/27 09:52:58 by ahugh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	sort_list(t_list **list, uint16_t options);
 */
 void	prepare_to_print_files(t_list *list, t_columns *c);
 void	print_file_type(t_file *file);
-void	print_file_mode(t_file *file);
+void	print_file_mode(t_file *file, t_columns *c);
 
 /*
 ** print_file.c
@@ -78,6 +78,11 @@ void	print_blocks(uint64_t count, t_columns *c, \
 */
 t_list	*read_dir(t_file *dir);
 void	print_dirs(t_list *dirs, uint16_t options, int step);
+
+/*
+** xattr.c
+*/
+char	get_xattr(char *file_name, char *prefix);
 
 /*
 ** utils.c

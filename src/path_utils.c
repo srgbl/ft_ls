@@ -6,27 +6,13 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 20:26:02 by slindgre          #+#    #+#             */
-/*   Updated: 2020/12/26 23:31:28 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/27 10:09:57 by ahugh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-int		print_error(int err, char *path, int mode)
-{
-	int	res;
-
-	res = 0;
-	if (err == EACCES && mode == S_IFDIR)
-		res = ft_printf("ft_ls: cannot open directory '%s': %s\n%_",
-				path, strerror(err), 2);
-	else
-		res = ft_printf("ft_ls: cannot access '%s': %s\n%_",
-				path, strerror(err), 2);
-	return (res);
-}
-
-void	ft_lst_free_file(void *elem, size_t content_size)
+void		ft_lst_free_file(void *elem, size_t content_size)
 {
 	if ((((t_file*)elem)->name) != NULL)
 		ft_strdel(&(((t_file*)elem)->name));
@@ -42,7 +28,7 @@ void	ft_lst_free_file(void *elem, size_t content_size)
 	ft_memdel(&elem);
 }
 
-void	map_to_file(t_stat buf, char *path, char *prefix, t_file *file)
+void		map_to_file(t_stat buf, char *path, char *prefix, t_file *file)
 {
 	file->inode = buf.st_ino;
 	file->name = ft_strdup(path);
@@ -62,17 +48,18 @@ void	map_to_file(t_stat buf, char *path, char *prefix, t_file *file)
 	file->blocks = buf.st_blocks;
 	file->owner_name = NULL;
 	file->group_name = NULL;
+	file->xattr = get_xattr(file->name, file->prefix);
 }
 
-int		is_dot_path(char *path)
+int			is_dot_path(char *path)
 {
 	if (ft_strcmp(path, ".") == 0 || ft_strcmp(path, "..") == 0)
 		return (TRUE);
 	return (FALSE);
 }
 
-int		verify_paths(t_list *path, t_list **dirs, t_list **files,
-uint16_t options)
+int			verify_paths(t_list *path, t_list **dirs, t_list **files, \
+															uint16_t options)
 {
 	t_stat	buf;
 	t_file	file;

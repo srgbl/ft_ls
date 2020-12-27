@@ -12,6 +12,20 @@
 
 #include "ft_ls.h"
 
+int		print_error(int err, char *path, int mode)
+{
+	int	res;
+
+	res = 0;
+	if (err == EACCES && mode == S_IFDIR)
+		res = ft_printf("ft_ls: cannot open directory '%s': %s\n%_",
+						path, strerror(err), 2);
+	else
+		res = ft_printf("ft_ls: cannot access '%s': %s\n%_",
+						path, strerror(err), 2);
+	return (res);
+}
+
 void	convert_file_mtime(t_file *file, char *time_str)
 {
 	char		*mtime;
