@@ -58,7 +58,7 @@ void				print_blocks(uint64_t count, t_columns *c, \
 {
 	uint8_t			prec;
 
-	prec = get_human_readable_size_width(count, c->options) >= c->w_blocks \
+	prec = get_human_readable_size_width(count, c->options) >= c->w_blocks - 1
 															? FALSE : TRUE;
 	ft_putstr(prefix);
 	if (c->options & OPT_LOWER_H)
