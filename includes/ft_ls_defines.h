@@ -90,6 +90,7 @@ typedef struct			s_columns
 	unsigned long		n_links;
 	long				blocks;
 	long				total_blocks;
+	uint16_t			options;
 
 	uint8_t				w_inode;
 	uint8_t				w_blocks;

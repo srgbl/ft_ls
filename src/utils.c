@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/21 01:59:24 by slindgre          #+#    #+#             */
-/*   Updated: 2020/12/27 04:31:56 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/27 04:53:50 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	print_file_blocks(t_file *file, t_columns *c)
 	if (file->invalid)
 		ft_printf("%*s ", c->w_blocks, "?");
 	else
-		ft_printf("%*ld ", c->w_blocks, file->blocks / 2);
+		print_blocks(file->blocks / 2, c, "", " ");
 }
 
 void	print_file_inode(t_file *file, t_columns *c)
@@ -51,7 +51,7 @@ void	print_file_inode(t_file *file, t_columns *c)
 		ft_printf("%*lu ", c->w_inode, file->inode);
 }
 
-void	get_fields_width(t_columns *c, uint16_t opt)
+void	get_fields_width(t_columns *c)
 {
 	if (c->w_owner == 0)
 		c->w_owner = 1;
@@ -65,7 +65,7 @@ void	get_fields_width(t_columns *c, uint16_t opt)
 	c->w_inode = 0;
 	c->w_blocks = 0;
 	c->w_links = 0;
-	if (opt & OPT_LOWER_L || opt & OPT_ONE)
+	if (c->options & OPT_LOWER_L || c->options & OPT_ONE)
 	{
 		c->w_inode = ft_nbrlen(c->inode);
 		c->w_blocks = ft_nbrlen(c->blocks);
