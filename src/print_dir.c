@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/04 02:23:45 by slindgre          #+#    #+#             */
-/*   Updated: 2020/12/27 03:33:27 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/27 17:00:51 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ t_list	*read_dir(t_file *dir)
 
 void	print_header(int i, t_file *dir, int step, uint16_t opt)
 {
-	if (!(i == 0 && step == 0))
+	if (!(i == 0 && step == 0 && !(opt & OPT_NEW_LINE)))
 		ft_printf("\n");
 	ft_printf(opt & OPT_UPPER_Q ? "\"%s%s\":\n" : "%s%s:\n",
 			dir->prefix, dir->name);

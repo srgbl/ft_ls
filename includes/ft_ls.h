@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 20:57:11 by slindgre          #+#    #+#             */
-/*   Updated: 2020/12/27 09:52:58 by ahugh            ###   ########.fr       */
+/*   Updated: 2020/12/27 16:59:18 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	print_file_mode(t_file *file, t_columns *c);
 /*
 ** print_file.c
 */
-void	print_file_info(t_file *file, uint16_t options, t_columns *c, int last);
+int		print_file_info(t_file *file, uint16_t options, t_columns *c, int last);
 int		print_files(t_list *files, uint16_t	options, int mode);
 
 /*

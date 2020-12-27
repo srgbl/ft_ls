@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 20:26:02 by slindgre          #+#    #+#             */
-/*   Updated: 2020/12/27 10:09:57 by ahugh            ###   ########.fr       */
+/*   Updated: 2020/12/27 16:57:57 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,5 @@ int			verify_paths(t_list *path, t_list **dirs, t_list **files, \
 		}
 		path = path->next;
 	}
-	return (res);
+	return (0);
 }
