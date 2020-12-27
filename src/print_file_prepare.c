@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/26 15:19:04 by slindgre          #+#    #+#             */
-/*   Updated: 2020/12/27 02:23:22 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/27 05:28:14 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,17 +65,19 @@ void	prepare_to_print_file(t_file *f, t_columns *c)
 	t_group		*group;
 	int			size_width;
 
-	if (f->blocks == 1)
-		f->blocks = 2;
+	f->blocks = (f->blocks == 1) ? 2 : f->blocks;
 	c->total_blocks += f->blocks / 2;
 	if ((owner = getpwuid(f->uid)) != NULL)
 		f->owner_name = ft_strdup(owner->pw_name);
 	if ((group = getgrgid(f->gid)) != NULL)
 		f->group_name = ft_strdup(group->gr_name);
 	c->inode = (f->inode > c->inode) ? f->inode : c->inode;
-	c->blocks = (f->blocks > c->blocks) ? f->blocks : c->blocks;
 	c->n_links = (f->n_links > c->n_links) ? f->n_links : c->n_links;
-	size_width = get_file_size_width(f, c->options);
+	size_width = get_size_width(f->blocks / 2, c->options);
+	if (c->options & OPT_LOWER_H)
+		size_width = get_size_width(f->blocks / 2 * BLOCK_SIZE, c->options);
+	c->w_blocks = (size_width > c->w_blocks) ? size_width : c->w_blocks;
+	size_width = get_size_width(f->size, c->options);
 	c->w_size = (size_width > c->w_size) ? size_width : c->w_size;
 	if (ft_strlen(f->owner_name) > c->w_owner)
 		c->w_owner = ft_strlen(f->owner_name);

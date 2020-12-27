@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/26 15:19:04 by slindgre          #+#    #+#             */
-/*   Updated: 2020/12/27 03:29:32 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/27 05:26:58 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int		print_files(t_list *list, uint16_t opt, int context)
 
 	columns.total_blocks = 0;
 	columns.inode = 0;
-	columns.blocks = 0;
+	columns.w_blocks = 0;
 	columns.n_links = 0;
 	columns.w_owner = 0;
 	columns.w_group = 0;

@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 21:19:04 by ahugh             #+#    #+#             */
-/*   Updated: 2020/12/27 02:22:09 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/27 05:43:02 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,29 +62,29 @@ void				print_blocks(uint64_t count, t_columns *c, \
 	ft_putstr(prefix);
 	if (c->options & OPT_LOWER_H)
 		print_human_readable_size(count * BLOCK_SIZE, c, \
-										c->w_blocks + 1, use_precision);
+										c->w_blocks, use_precision);
 	else
 		print_human_readable_size(count, c, c->w_blocks, use_precision);
 	ft_putstr(suffix);
 }
 
-int					get_file_size_width(t_file *file, uint16_t opt)
+int					get_size_width(long size, uint16_t opt)
 {
 	uint			unit_type;
-	float			file_size;
+	float			f_size;
 	int				width;
 
-	file_size = (float)(file->size);
-	if (file->size < BLOCK_SIZE || !(opt & OPT_LOWER_H))
-		return (ft_nbrlen(file->size));
+	if (size < BLOCK_SIZE || !(opt & OPT_LOWER_H))
+		return (ft_nbrlen(size));
+	f_size = (float)(size);
 	unit_type = 1;
-	while (file_size >= BLOCK_SIZE && !(unit_type & PB))
+	while (f_size >= BLOCK_SIZE && !(unit_type & PB))
 	{
-		file_size /= BLOCK_SIZE;
+		f_size /= BLOCK_SIZE;
 		unit_type <<= 1;
 	}
 	width = 4;
-	while ((file_size /= 10) >= 1)
+	while ((f_size /= 10) >= 1)
 		width++;
 	return (width);
 }

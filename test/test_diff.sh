@@ -6,7 +6,7 @@ EOC='\033[0m'
 ex_1="./ft_ls $1"
 ex_2="ls $1"
 
-declare -a set="artsSQmi1GltR"
+declare -a set="artsSQmi1GRlg"
 setlist=`crunch 0 3 "$set"`
 
 compare(){
@@ -18,7 +18,7 @@ compare(){
         printf "${RED}KO${EOC}: "
         echo "${ex_1} -$1 -1"
         git diff --no-index --unified=0 o1 o2
-        exit
+        #exit
     else
         printf "${GREEN}OK${EOC}: "
         echo "${ex_1} -$1 -1"

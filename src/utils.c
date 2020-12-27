@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/21 01:59:24 by slindgre          #+#    #+#             */
-/*   Updated: 2020/12/27 04:53:50 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/27 05:34:04 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,12 @@ void	get_fields_width(t_columns *c)
 		c->w_name = 1;
 	if (c->w_size == 0)
 		c->w_size = 1;
-	c->blocks /= 2;
-	c->w_inode = 0;
-	c->w_blocks = 0;
+	if (c->w_blocks == 0)
+		c->w_blocks = 1;
 	c->w_links = 0;
+	c->w_inode = ft_nbrlen(c->inode);
 	if (c->options & OPT_LOWER_L || c->options & OPT_ONE)
 	{
-		c->w_inode = ft_nbrlen(c->inode);
-		c->w_blocks = ft_nbrlen(c->blocks);
 		c->w_links = ft_nbrlen(c->n_links);
 	}
 }
