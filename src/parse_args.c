@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 11:35:28 by slindgre          #+#    #+#             */
-/*   Updated: 2020/12/27 16:50:37 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/27 17:49:41 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,13 @@ int			parse_options(char *arg, uint16_t *options)
 	int	i;
 
 	i = 0;
-	if (*arg == '-' && ft_strlen(arg) > 1)
-		return (-2);
+	if (*arg == '-')
+	{
+		if (ft_strlen(arg) > 1)
+			return (-2);
+		*options |= OPT_ONLY_FILES;
+		return (-1);
+	}
 	while (*arg)
 	{
 		ind = ft_strchrind(OPTIONS, *arg);

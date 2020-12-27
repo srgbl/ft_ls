@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 20:57:11 by slindgre          #+#    #+#             */
-/*   Updated: 2020/12/27 16:51:51 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/27 17:49:52 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
 # define OPT_ONLY_FILES	(uint16_t)(1 << 14)
 
 # define OPT_NEW_LINE	(uint16_t)(1 << 15)
-# define OPTIONS		"alrtRsShQmgi1G-"
+# define OPTIONS		"alrtRsShQmgi1G"
 # define FALSE			0
 # define TRUE			1
 # define FILES_PER_ROW	1
