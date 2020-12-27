@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 20:57:11 by slindgre          #+#    #+#             */
-/*   Updated: 2020/12/27 10:25:11 by ahugh            ###   ########.fr       */
+/*   Updated: 2020/12/27 17:49:52 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@
 # define OPT_LOWER_I	(uint16_t)(1 << 11)
 # define OPT_ONE		(uint16_t)(1 << 12)
 # define OPT_UPPER_G	(uint16_t)(1 << 13)
+# define OPT_ONLY_FILES	(uint16_t)(1 << 14)
 
 # define OPT_NEW_LINE	(uint16_t)(1 << 15)
 # define OPTIONS		"alrtRsShQmgi1G"
@@ -96,7 +97,6 @@ typedef struct			s_columns
 {
 	unsigned long		inode;
 	unsigned long		n_links;
-	long				blocks;
 	long				total_blocks;
 	uint16_t			options;
 

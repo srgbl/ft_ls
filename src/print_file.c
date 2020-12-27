@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/26 15:19:04 by slindgre          #+#    #+#             */
-/*   Updated: 2020/12/27 05:26:58 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/27 16:57:38 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	print_invalid_file(uint16_t opt, t_columns *c)
 	ft_printf("%*s %12s ", c->w_size, "?", "?");
 }
 
-void	print_file_info(t_file *file, uint16_t opt, t_columns *c, int last)
+int		print_file_info(t_file *file, uint16_t opt, t_columns *c, int last)
 {
 	if (opt & OPT_LOWER_I)
 		print_file_inode(file, c);
@@ -61,6 +61,7 @@ void	print_file_info(t_file *file, uint16_t opt, t_columns *c, int last)
 	if (opt & OPT_LOWER_M && last == FALSE)
 		ft_printf(",");
 	ft_printf("\n");
+	return (1);
 }
 
 void	init_columns(t_columns *columns)
@@ -81,7 +82,9 @@ int		print_files(t_list *list, uint16_t opt, int context)
 {
 	t_file		*file;
 	t_columns	columns;
+	int			res;
 
+	res = 0;
 	init_columns(&columns);
 	columns.options = opt;
 	prepare_to_print_files(list, &columns);
@@ -92,8 +95,8 @@ int		print_files(t_list *list, uint16_t opt, int context)
 	{
 		file = (t_file*)list->content;
 		if (file->visibility == TRUE || opt & OPT_LOWER_A)
-			print_file_info(file, opt, &columns, list->next == NULL);
+			res += print_file_info(file, opt, &columns, list->next == NULL);
 		list = list->next;
 	}
-	return (opt & OPT_NEW_LINE);
+	return (res);
 }

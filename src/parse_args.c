@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 11:35:28 by slindgre          #+#    #+#             */
-/*   Updated: 2020/12/27 00:38:13 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/27 17:49:41 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,12 @@ int			parse_options(char *arg, uint16_t *options)
 
 	i = 0;
 	if (*arg == '-')
-		return (-2);
+	{
+		if (ft_strlen(arg) > 1)
+			return (-2);
+		*options |= OPT_ONLY_FILES;
+		return (-1);
+	}
 	while (*arg)
 	{
 		ind = ft_strchrind(OPTIONS, *arg);
@@ -51,29 +56,29 @@ int			parse_options(char *arg, uint16_t *options)
 	return (-1);
 }
 
-void		parse_args(int argc, char *argv[], t_list **paths, uint16_t *opt)
+void		parse_args(int argc, char *a[], t_list **paths, uint16_t *opt)
 {
 	int	i;
-	int	res;
+	int	r;
 
 	i = 1;
 	while (i < argc)
 	{
-		if (ft_strlen(argv[i]) > 1 && argv[i][0] == '-')
+		if (ft_strlen(a[i]) > 1 && a[i][0] == '-' && !(*opt & OPT_ONLY_FILES))
 		{
-			if ((res = parse_options(argv[i] + 1, opt)) != -1)
+			if ((r = parse_options(a[i] + 1, opt)) != -1)
 			{
-				if (res == -2)
-					ft_printf("ft_ls: unrecognized option '%s'\n", argv[i]);
+				if (r == -2)
+					ft_printf("ft_ls: unrecognized option '%s'\n%_", a[i], 2);
 				else
-					ft_printf("ft_ls: invalid option -- '%c'\n", argv[i][res]);
-				ft_printf("usage: ./ft_ls [-%s] [file ...]\n", OPTIONS);
+					ft_printf("ft_ls: invalid option -- '%c'\n%_", a[i][r], 2);
+				ft_printf("usage: ./ft_ls [-%s] [file ...]\n%_", OPTIONS, 2);
 				ft_lstdel(paths, ft_lst_free_elem);
-				exit(-1);
+				exit(2);
 			}
 		}
 		else
-			ft_lstadd_back(paths, argv[i], ft_strlen(argv[i]) + 1);
+			ft_lstadd_back(paths, a[i], ft_strlen(a[i]) + 1);
 		i++;
 	}
 	if (ft_lstsize(*paths) == 0)
