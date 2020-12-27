@@ -6,13 +6,11 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/26 15:19:04 by slindgre          #+#    #+#             */
-/*   Updated: 2020/12/27 01:49:07 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/27 03:29:32 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-#define LINKQ " -> \"%s\""
-#define LINK  " -> %s"
 
 void	print_valid_file(t_file *file, uint16_t opt, t_columns *c)
 {

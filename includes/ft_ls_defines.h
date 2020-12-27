@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 20:57:11 by slindgre          #+#    #+#             */
-/*   Updated: 2020/12/27 01:41:34 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/27 03:29:48 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@
 # define GB				1 << 3
 # define TB				1 << 4
 # define PB				1 << 5
+# define LINKQ			" -> \"%s\""
+# define LINK			" -> %s"
 
 typedef struct dirent	t_dirent;
 typedef struct stat		t_stat;
