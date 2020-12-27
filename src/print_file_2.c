@@ -89,5 +89,5 @@ int					get_human_readable_size_width(uint64_t size, uint16_t opt)
 		if (f_size - (float)size > 0.01)
 			tail = 3;
 	}
-	return (ft_nbrlen(size)+tail);
+	return (ft_nbrlen(size) + tail);
 }
