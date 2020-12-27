@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/26 15:19:04 by slindgre          #+#    #+#             */
-/*   Updated: 2020/12/27 05:28:14 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/27 15:39:49 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ void				prepare_to_print_file(t_file *f, t_columns *c)
 	if ((group = getgrgid(f->gid)) != NULL)
 		f->group_name = ft_strdup(group->gr_name);
 	c->inode = (f->inode > c->inode) ? f->inode : c->inode;
-	c->blocks = (f->blocks > c->blocks) ? f->blocks : c->blocks;
 	size_width = get_human_readable_size_width(f->blocks / 2, c->options);
 	c->w_blocks = (size_width > c->w_blocks) ? size_width : c->w_blocks;
 	c->n_links = (f->n_links > c->n_links) ? f->n_links : c->n_links;

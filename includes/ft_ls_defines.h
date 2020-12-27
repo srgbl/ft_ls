@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 20:57:11 by slindgre          #+#    #+#             */
-/*   Updated: 2020/12/27 10:25:11 by ahugh            ###   ########.fr       */
+/*   Updated: 2020/12/27 15:40:09 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ typedef struct			s_columns
 {
 	unsigned long		inode;
 	unsigned long		n_links;
-	long				blocks;
 	long				total_blocks;
 	uint16_t			options;
 
