@@ -57,7 +57,7 @@ void	sort_list(t_list **list, uint16_t options);
 */
 void	prepare_to_print_files(t_list *list, t_columns *c);
 void	print_file_type(t_file *file);
-void	print_file_mode(t_file *file);
+void	print_file_mode(t_file *file, t_columns *c);
 
 /*
 ** print_file.c

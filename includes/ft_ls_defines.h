@@ -17,6 +17,7 @@
 # include <stdio.h>
 # include <stdint.h>
 # include <sys/stat.h>
+# include <sys/xattr.h>
 # include <pwd.h>
 # include <grp.h>
 # include <time.h>
@@ -44,7 +45,8 @@
 # define TRUE			1
 # define FILES_PER_ROW	1
 # define MODES_LEN		9
-# define MODES			"rwxrwxrwx"
+# define MODES_XATTR	9
+# define MODES			"rwxrwxrwx "
 # define PATH_LEN		1024
 # define BLOCK_SIZE		1024
 # define HALF_YEAR		15552000
@@ -82,6 +84,7 @@ typedef struct			s_file
 	char				*owner_name;
 	char				*group_name;
 	char				*target_path;
+	char				xattr;
 }						t_file;
 
 typedef struct			s_columns
@@ -99,6 +102,7 @@ typedef struct			s_columns
 	uint8_t				w_group;
 	uint8_t				w_size;
 	uint8_t				w_name;
+	uint8_t				xattr_enabled;
 }						t_columns;
 
 #endif

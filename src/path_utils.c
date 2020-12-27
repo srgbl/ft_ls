@@ -12,21 +12,7 @@
 
 #include "ft_ls.h"
 
-int		print_error(int err, char *path, int mode)
-{
-	int	res;
-
-	res = 0;
-	if (err == EACCES && mode == S_IFDIR)
-		res = ft_printf("ft_ls: cannot open directory '%s': %s\n%_",
-				path, strerror(err), 2);
-	else
-		res = ft_printf("ft_ls: cannot access '%s': %s\n%_",
-				path, strerror(err), 2);
-	return (res);
-}
-
-void	ft_lst_free_file(void *elem, size_t content_size)
+void		ft_lst_free_file(void *elem, size_t content_size)
 {
 	if ((((t_file*)elem)->name) != NULL)
 		ft_strdel(&(((t_file*)elem)->name));
@@ -42,7 +28,24 @@ void	ft_lst_free_file(void *elem, size_t content_size)
 	ft_memdel(&elem);
 }
 
-void	map_to_file(t_stat buf, char *path, char *prefix, t_file *file)
+char		get_xattr(char *file_name, char *prefix)
+{
+	ssize_t	buff_len;
+	char	*path;
+
+	errno = 0;
+	path = ft_strjoin(prefix, file_name);
+	buff_len = listxattr(path, NULL, 0);
+	free(path);
+	if (buff_len < 1 || errno != 0)
+	{
+		errno = 0;
+		return ('\0');
+	}
+	return ('@');
+}
+
+void		map_to_file(t_stat buf, char *path, char *prefix, t_file *file)
 {
 	file->inode = buf.st_ino;
 	file->name = ft_strdup(path);
@@ -62,17 +65,18 @@ void	map_to_file(t_stat buf, char *path, char *prefix, t_file *file)
 	file->blocks = buf.st_blocks;
 	file->owner_name = NULL;
 	file->group_name = NULL;
+	file->xattr = get_xattr(file->name, file->prefix);
 }
 
-int		is_dot_path(char *path)
+int			is_dot_path(char *path)
 {
 	if (ft_strcmp(path, ".") == 0 || ft_strcmp(path, "..") == 0)
 		return (TRUE);
 	return (FALSE);
 }
 
-int		verify_paths(t_list *path, t_list **dirs, t_list **files,
-uint16_t options)
+int			verify_paths(t_list *path, t_list **dirs, t_list **files, \
+															uint16_t options)
 {
 	t_stat	buf;
 	t_file	file;

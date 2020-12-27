@@ -12,13 +12,29 @@
 
 #include "ft_ls.h"
 
-void	print_file_mode(t_file *file)
+static inline void	set_extra_mode(t_file *file, char *modes, int mode, \
+														uint8_t xattr_enabled)
 {
-	char		modes[MODES_LEN];
-	static int	modes_options[MODES_LEN] = {S_IRUSR, S_IWUSR, S_IXUSR,
+	if (mode & S_ISUID)
+		modes[2] = 's';
+	if (mode & S_ISGID)
+		modes[5] = 's';
+	if (mode & S_ISVTX)
+		modes[8] = 't';
+	if (xattr_enabled)
+		modes[MODES_XATTR] = (file->xattr == '\0') ?
+										MODES[MODES_XATTR] : file->xattr;
+	else
+		modes[MODES_XATTR] = '\0';
+}
+
+void				print_file_mode(t_file *file, t_columns *c)
+{
+	char			modes[MODES_LEN + 1];
+	static int		modes_options[MODES_LEN] = {S_IRUSR, S_IWUSR, S_IXUSR,
 	S_IRGRP, S_IWGRP, S_IXGRP, S_IROTH, S_IWOTH, S_IXOTH};
-	int			i;
-	int			mode;
+	int				i;
+	int				mode;
 
 	i = 0;
 	mode = file->mode;
@@ -30,18 +46,13 @@ void	print_file_mode(t_file *file)
 			modes[i] = MODES[i];
 		i++;
 	}
-	if (mode & S_ISUID)
-		modes[2] = 's';
-	if (mode & S_ISGID)
-		modes[5] = 's';
-	if (mode & S_ISVTX)
-		modes[8] = 't';
+	set_extra_mode(file, modes, mode, c->xattr_enabled);
 	ft_printf("%s", modes);
 }
 
-void	print_file_type(t_file *file)
+void				print_file_type(t_file *file)
 {
-	char	type_literal;
+	char			type_literal;
 
 	type_literal = '-';
 	if (file->type == S_IFLNK)
@@ -59,11 +70,11 @@ void	print_file_type(t_file *file)
 	ft_printf("%c", type_literal);
 }
 
-void	prepare_to_print_file(t_file *f, t_columns *c)
+void				prepare_to_print_file(t_file *f, t_columns *c)
 {
-	t_passwd	*owner;
-	t_group		*group;
-	int			size_width;
+	t_passwd		*owner;
+	t_group			*group;
+	int				size_width;
 
 	f->blocks = (f->blocks == 1) ? 2 : f->blocks;
 	c->total_blocks += f->blocks / 2;
@@ -84,11 +95,13 @@ void	prepare_to_print_file(t_file *f, t_columns *c)
 		c->w_group = ft_strlen(f->group_name);
 	if (ft_strlen(f->name) > c->w_name)
 		c->w_name = ft_strlen(f->name);
+	if (f->xattr != '\0')
+		c->xattr_enabled = TRUE;
 }
 
-void	prepare_to_print_files(t_list *list, t_columns *c)
+void				prepare_to_print_files(t_list *list, t_columns *c)
 {
-	t_file		*f;
+	t_file			*f;
 
 	while (list)
 	{
