@@ -63,12 +63,10 @@ void	get_fields_width(t_columns *c)
 		c->w_size = 1;
 	c->blocks /= 2;
 	c->w_inode = 0;
-	c->w_blocks = 0;
 	c->w_links = 0;
 	if (c->options & OPT_LOWER_L || OPT_ONE)
 	{
 		c->w_inode = ft_nbrlen(c->inode);
-		c->w_blocks = ft_nbrlen(c->blocks);
 		c->w_links = ft_nbrlen(c->n_links);
 	}
 }
