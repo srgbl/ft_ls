@@ -74,8 +74,10 @@ void	prepare_to_print_file(t_file *f, t_columns *c)
 		f->group_name = ft_strdup(group->gr_name);
 	c->inode = (f->inode > c->inode) ? f->inode : c->inode;
 	c->blocks = (f->blocks > c->blocks) ? f->blocks : c->blocks;
+	size_width = get_human_readable_size_width(f->blocks / 2, c->options);
+	c->w_blocks = (size_width > c->w_blocks) ? size_width : c->w_blocks;
 	c->n_links = (f->n_links > c->n_links) ? f->n_links : c->n_links;
-	size_width = get_file_size_width(f, c->options);
+	size_width = get_human_readable_size_width(f->size, c->options);
 	c->w_size = (size_width > c->w_size) ? size_width : c->w_size;
 	if (ft_strlen(f->owner_name) > c->w_owner)
 		c->w_owner = ft_strlen(f->owner_name);

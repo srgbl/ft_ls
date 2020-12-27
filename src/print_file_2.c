@@ -56,35 +56,38 @@ void				print_file_size(t_file *file, t_columns *c)
 void				print_blocks(uint64_t count, t_columns *c, \
 													char *prefix, char *suffix)
 {
-	uint8_t			use_precision;
+	uint8_t			prec;
 
-	use_precision = ft_nbrlen(count) >= c->w_blocks ? FALSE : TRUE;
+	prec = get_human_readable_size_width(count, c->options) >= c->w_blocks \
+															? FALSE : TRUE;
 	ft_putstr(prefix);
 	if (c->options & OPT_LOWER_H)
 		print_human_readable_size(count * BLOCK_SIZE, c, \
-										c->w_blocks + 1, use_precision);
+										c->w_blocks + 1, prec);
 	else
-		print_human_readable_size(count, c, c->w_blocks, use_precision);
+		print_human_readable_size(count, c, c->w_blocks, prec);
 	ft_putstr(suffix);
 }
 
-int					get_file_size_width(t_file *file, uint16_t opt)
+int					get_human_readable_size_width(uint64_t size, uint16_t opt)
 {
 	uint			unit_type;
-	float			file_size;
-	int				width;
+	int				tail;
+	float			f_size;
 
-	file_size = (float)(file->size);
-	if (file->size < BLOCK_SIZE || !(opt & OPT_LOWER_H))
-		return (ft_nbrlen(file->size));
-	unit_type = 1;
-	while (file_size >= BLOCK_SIZE && !(unit_type & PB))
+	tail = 0;
+	if (opt & OPT_LOWER_H)
 	{
-		file_size /= BLOCK_SIZE;
-		unit_type <<= 1;
+		unit_type = 1;
+		f_size = (float)size;
+		while (size >= BLOCK_SIZE && !(unit_type & PB))
+		{
+			size /= BLOCK_SIZE;
+			f_size /= BLOCK_SIZE;
+			unit_type <<= 1;
+		}
+		if (f_size - (float)size > 0.01)
+			tail = 3;
 	}
-	width = 4;
-	while ((file_size /= 10) >= 1)
-		width++;
-	return (width);
+	return (ft_nbrlen(size)+tail);
 }

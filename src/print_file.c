@@ -75,6 +75,7 @@ int		print_files(t_list *list, uint16_t opt, int context)
 	columns.w_group = 0;
 	columns.w_name = 0;
 	columns.w_size = 0;
+	columns.w_blocks = 0;
 	columns.options = opt;
 	prepare_to_print_files(list, &columns);
 	get_fields_width(&columns);
