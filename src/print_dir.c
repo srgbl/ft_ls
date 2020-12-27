@@ -6,7 +6,7 @@
 /*   By: slindgre <slindgre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/04 02:23:45 by slindgre          #+#    #+#             */
-/*   Updated: 2020/12/26 23:55:46 by slindgre         ###   ########.fr       */
+/*   Updated: 2020/12/27 03:33:27 by slindgre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,12 @@ t_list	*read_dir(t_file *dir)
 	return (files);
 }
 
-void	print_header(int i, t_file *dir)
+void	print_header(int i, t_file *dir, int step, uint16_t opt)
 {
-	if (i != 0)
+	if (!(i == 0 && step == 0))
 		ft_printf("\n");
-	ft_printf("%s%s:\n", dir->prefix, dir->name);
+	ft_printf(opt & OPT_UPPER_Q ? "\"%s%s\":\n" : "%s%s:\n",
+			dir->prefix, dir->name);
 }
 
 void	print_dirs(t_list *dirs, uint16_t opt, int step)
@@ -108,7 +109,7 @@ void	print_dirs(t_list *dirs, uint16_t opt, int step)
 			if ((files = read_dir(dir)) != NULL &&
 				(!(i == 0 && !dirs->next && !(opt & OPT_NEW_LINE))
 				|| opt & OPT_UPPER_R))
-				print_header(i, dir);
+				print_header(i, dir, step, opt);
 			sort_list(&files, opt);
 			print_files(files, opt, S_IFDIR);
 			if (opt & OPT_UPPER_R)
