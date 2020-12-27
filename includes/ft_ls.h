@@ -55,7 +55,7 @@ void	sort_list(t_list **list, uint16_t options);
 /*
 ** print_file_prepare.c
 */
-void	prepare_to_print_files(t_list *list, uint16_t options, t_columns *c);
+void	prepare_to_print_files(t_list *list, t_columns *c);
 void	print_file_type(t_file *file);
 void	print_file_mode(t_file *file);
 
@@ -68,8 +68,10 @@ int		print_files(t_list *files, uint16_t	options, int mode);
 /*
 ** print_file_2.c
 */
-void	print_file_size(t_file *file, uint16_t options, t_columns *c);
 int		get_file_size_width(t_file *file, uint16_t options);
+void	print_file_size(t_file *file, t_columns *c);
+void	print_blocks(uint64_t count, t_columns *c, \
+												char *prefix, char *suffix);
 
 /*
 ** print_dir.c
@@ -83,6 +85,6 @@ void	print_dirs(t_list *dirs, uint16_t options, int step);
 void	convert_file_mtime(t_file *file, char *time_str);
 void	print_file_inode(t_file *file, t_columns *c);
 void	print_file_blocks(t_file *file, t_columns *c);
-void	get_fields_width(t_columns *c, uint16_t opt);
+void	get_fields_width(t_columns *c);
 
 #endif

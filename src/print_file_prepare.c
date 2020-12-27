@@ -59,7 +59,7 @@ void	print_file_type(t_file *file)
 	ft_printf("%c", type_literal);
 }
 
-void	prepare_to_print_file(t_file *f, uint16_t options, t_columns *c)
+void	prepare_to_print_file(t_file *f, t_columns *c)
 {
 	t_passwd	*owner;
 	t_group		*group;
@@ -75,7 +75,7 @@ void	prepare_to_print_file(t_file *f, uint16_t options, t_columns *c)
 	c->inode = (f->inode > c->inode) ? f->inode : c->inode;
 	c->blocks = (f->blocks > c->blocks) ? f->blocks : c->blocks;
 	c->n_links = (f->n_links > c->n_links) ? f->n_links : c->n_links;
-	size_width = get_file_size_width(f, options);
+	size_width = get_file_size_width(f, c->options);
 	c->w_size = (size_width > c->w_size) ? size_width : c->w_size;
 	if (ft_strlen(f->owner_name) > c->w_owner)
 		c->w_owner = ft_strlen(f->owner_name);
@@ -85,15 +85,15 @@ void	prepare_to_print_file(t_file *f, uint16_t options, t_columns *c)
 		c->w_name = ft_strlen(f->name);
 }
 
-void	prepare_to_print_files(t_list *list, uint16_t options, t_columns *c)
+void	prepare_to_print_files(t_list *list, t_columns *c)
 {
 	t_file		*f;
 
 	while (list)
 	{
 		f = (t_file*)list->content;
-		if ((f->visibility || options & OPT_LOWER_A) && !f->invalid)
-			prepare_to_print_file(f, options, c);
+		if ((f->visibility || c->options & OPT_LOWER_A) && !f->invalid)
+			prepare_to_print_file(f, c);
 		list = list->next;
 	}
 }

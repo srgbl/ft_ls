@@ -26,25 +26,46 @@ static inline void	print_unit_type_literal(uint unit_type)
 		ft_putchar('P');
 }
 
-void				print_file_size(t_file *file, uint16_t opt, t_columns *c)
+static inline void	print_human_readable_size(uint64_t size, t_columns *c, \
+											uint width, uint8_t use_precision)
 {
 	uint			unit_type;
-	float			file_size;
+	float			f_size;
 
-	file_size = (float)(file->size);
-	if (file->size < BLOCK_SIZE || !(opt & OPT_LOWER_H))
+	if (size < BLOCK_SIZE || !(c->options & OPT_LOWER_H))
 	{
-		ft_printf("%*zu", c->w_size, file->size);
+		ft_printf("%*zu", width, size);
 		return ;
 	}
+	f_size = (float)size;
 	unit_type = 1;
-	while (file_size >= BLOCK_SIZE && !(unit_type & PB))
+	while (f_size >= BLOCK_SIZE && !(unit_type & PB))
 	{
-		file_size /= BLOCK_SIZE;
+		f_size /= BLOCK_SIZE;
 		unit_type <<= 1;
 	}
-	ft_printf("%*.1f", c->w_size - 1, file_size);
+	ft_printf("%*.*f", width - 1, use_precision, f_size);
 	print_unit_type_literal(unit_type);
+}
+
+void				print_file_size(t_file *file, t_columns *c)
+{
+	print_human_readable_size(file->size, c, c->w_size, TRUE);
+}
+
+void				print_blocks(uint64_t count, t_columns *c, \
+													char *prefix, char *suffix)
+{
+	uint8_t			use_precision;
+
+	use_precision = ft_nbrlen(count) >= c->w_blocks ? FALSE : TRUE;
+	ft_putstr(prefix);
+	if (c->options & OPT_LOWER_H)
+		print_human_readable_size(count * BLOCK_SIZE, c, \
+										c->w_blocks + 1, use_precision);
+	else
+		print_human_readable_size(count, c, c->w_blocks, use_precision);
+	ft_putstr(suffix);
 }
 
 int					get_file_size_width(t_file *file, uint16_t opt)
